@@ -1,5 +1,51 @@
 ---
 title: "Data Cleaning and Preparation"
 output: html_document
+editor_options: 
+  chunk_output_type: console
 ---
 
+```{r}
+install.packages("pacman")
+
+pacman::p_load(tidyverse, ggplot2, tidyr, dplyr, stringr, here)
+```
+
+```{r load data}
+free_company_dataset <- read_csv(here("raw_data", "free_company_dataset.csv"))
+
+#add to gitignore
+
+```
+
+```{r filter for the largest companies and drop sites without website}
+
+free_company_dataset %>% group_by(size) %>% count(sort=T) %>% View()
+
+sum(is.na(free_company_dataset$website))
+#[1] 2891498
+
+free_company_dataset_filtered <- free_company_dataset %>% 
+  drop_na(website) %>% 
+  filter(size == "10001+" | size == "5001-10000" | size == "1001-5000" | size == "501-1000" | size == "201-500") %>% 
+  filter(industry != "government administration" & industry != "government relations" ) %>%  # remove government administration
+  filter((!str_detect(website, "\\.gov"))) #removes around 11k sites
+# remove websites without a country or assign those to countries?
+
+free_company_dataset_filtered %>% group_by(country) %>% count(sort=T) %>% View()
+
+
+Us_companies <- free_company_dataset_filtered %>% filter(country=="united states") 
+
+
+#startups
+free_company_dataset %>% group_by(founded) %>% count(sort = T) %>% view()
+
+
+
+#normal companies
+```
+
+```{r}
+
+```
