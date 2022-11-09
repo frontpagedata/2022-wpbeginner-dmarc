@@ -225,6 +225,11 @@ if(save == T){
 # 2 pdfs will then be converted into the pngs using the 04_convert_pdfs_to_pngs.rmd file. 
 ```
 
+```{r}
+domain_ %>%  group_by(domain_$country) %>% count(sort = T) %>% view()
+
+domain_ %>%  group_by(domain_$dmarc_valid) %>% count(sort = T) %>% view()
+```
 
 
 

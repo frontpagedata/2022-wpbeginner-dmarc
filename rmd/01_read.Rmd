@@ -6,7 +6,7 @@ editor_options:
 ---
 
 ```{r}
-install.packages("pacman")
+
 
 pacman::p_load(tidyverse, ggplot2, tidyr, dplyr, stringr, here)
 ```
@@ -20,26 +20,65 @@ free_company_dataset <- read_csv(here("raw_data", "free_company_dataset.csv"))
 
 ```{r filter for the largest companies and drop sites without website}
 
-free_company_dataset %>% group_by(size) %>% count(sort=T) %>% View()
 
 sum(is.na(free_company_dataset$website))
 #[1] 2891498
 
+sum(is.na(free_company_dataset$region))
+#[1] 3380297
+
 free_company_dataset_filtered <- free_company_dataset %>% 
-  drop_na(website) %>% 
+  drop_na(website) %>%
+  drop_na(region) %>%  #some websites are not correctly assigned to the country. Let´s remove the websites that don´t have a region
   filter(size == "10001+" | size == "5001-10000" | size == "1001-5000" | size == "501-1000" | size == "201-500") %>% 
-  filter(industry != "government administration" & industry != "government relations" ) %>%  # remove government administration
-  filter((!str_detect(website, "\\.gov"))) #removes around 11k sites
-# remove websites without a country or assign those to countries?
-
-free_company_dataset_filtered %>% group_by(country) %>% count(sort=T) %>% View()
-
-
-Us_companies <- free_company_dataset_filtered %>% filter(country=="united states") 
+  filter(industry != "government administration" & industry != "government relations" & industry != "legislative office" & industry != "public policy" & industry !="political organization") %>%  # remove government administration
+  filter((!str_detect(website, "\\.gov"))) %>%  #removes around 11k sites
+  mutate(size=factor(size)) %>% 
+  mutate(size=fct_relevel(size,c("201-500", "501-1000","1001-5000","5001-10000", "10001+"))) 
 
 
-#startups
-free_company_dataset %>% group_by(founded) %>% count(sort = T) %>% view()
+nrow(free_company_dataset_filtered)
+#[1] 397665 - without dropping region == NA
+#[1] 290390 - with dropping region == NA
+
+
+#filter for top_n companies by size for a country
+free_company_dataset_top_x <- free_company_dataset_filtered %>% 
+  group_by(country) %>% 
+  slice_max(order_by = size, n = 5000, with_ties = FALSE) 
+
+
+free_company_dataset_top_x <- free_company_dataset_top_x %>% 
+  group_by(country) %>% 
+  filter(n() > 300) 
+  
+  
+# free_company_dataset_top_x %>%  group_by(country) %>% count(sort=T) %>% View()
+ 
+
+
+
+# 
+# 
+# 
+#  
+# free_company_dataset_top_x %>% group_by(country) %>% count(sort=T) %>% View() 
+# 
+# 
+# 
+# free_company_dataset_filtered %>% group_by(industry)%>% count(sort=T) %>% View()
+# 
+# free_company_dataset_filtered %>% group_by(country)%>% count(sort=T) %>% View()
+# 
+# 
+# free_company_dataset_filtered %>% group_by(country) %>% count(sort=T) %>% View()
+# 
+# 
+# Us_companies <- free_company_dataset_filtered %>% filter(country=="united states") 
+# 
+# 
+# #startups
+# free_company_dataset %>% group_by(founded) %>% count(sort = T) %>% view()
 
 
 
@@ -47,5 +86,5 @@ free_company_dataset %>% group_by(founded) %>% count(sort = T) %>% view()
 ```
 
 ```{r}
-
+write_csv(free_company_dataset_top_x, here("proc_data", "free_company_dataset_top_x")) 
 ```
