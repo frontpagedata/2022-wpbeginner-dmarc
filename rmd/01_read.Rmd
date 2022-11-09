@@ -88,3 +88,14 @@ free_company_dataset_top_x <- free_company_dataset_top_x %>%
 ```{r}
 write_csv(free_company_dataset_top_x, here("proc_data", "free_company_dataset_top_x")) 
 ```
+
+
+```{r}
+install.packages("clipr")
+
+library("clipr")
+
+fortune_500 <- read_clip_tbl()
+
+```
+
