@@ -1,0 +1,69 @@
+---
+title: "wpbeginner-dmarc"
+format: 
+  html:
+    code-fold: true
+    code-tools: true
+    code-summary: "View code"
+editor: visual
+---
+
+```{r setup}
+#| message: false
+library(dplyr)   # CRAN v1.0.10
+library(readr)   # CRAN v2.1.3
+library(here)    # CRAN v1.0.1
+library(janitor) # CRAN v2.1.0
+library(ggplot2) # CRAN v3.4.0
+library(ggforce) # CRAN v0.4.1
+library(stringr) # CRAN v1.4.1
+library(scales)
+```
+
+```{r}
+#| message: false
+fortune500 <- read_csv(here("proc_data", "processed by vlad", "fortune500.csv"))
+top5kcompanies <- read_csv(here("proc_data", "processed by vlad", "top5kcompanies.csv"))
+
+```
+
+```{r}
+top5kcompanies %>% count(dmarc_valid)
+fortune500 %>% count(dmarc_valid)
+
+```
+trying out half-donut plots for the dmarc yes/no data
+(quite easy to do even for many groups)
+```{r}
+f500dic <- fortune500 %>% tabyl(dmarc_valid) %>% mutate(ymax=cumsum(percent))
+top5dic <- top5kcompanies %>% tabyl(dmarc_valid) %>% mutate(ymax=cumsum(percent))
+
+f500dic <- 
+f500dic %>% 
+  mutate(ymin=c(0,slice_head(f500dic,n=-1)$ymax)) %>% 
+  mutate(across(c(ymax,ymin), rescale, to = pi*c(-.5,.5), from = 0:1)) %>% 
+  mutate(domtype="Fortune 500 Companies",
+         midangle= 0.5*(ymin + ymax),
+         labspct=paste(round(percent,2)*100,"%"))
+top5dic <- 
+  top5dic %>% 
+  mutate(ymin=c(0,slice_head(top5dic,n=-1)$ymax)) %>% 
+  mutate(across(c(ymax,ymin), rescale, to = pi*c(-.5,.5), from = 0:1)) %>% 
+  mutate(domtype="Top 5k Companies",
+         midangle= 0.5*(ymin + ymax),
+         labspct=paste(round(percent,2)*100,"%"))
+
+
+bind_rows(f500dic,top5dic) %>% 
+ggplot()+
+  geom_arc_bar(aes(x0 = 0, y0 = 0, r0 = 0.7, r = 1, start = ymin, end = ymax, fill= dmarc_valid), 
+               colour = "#949398")+
+  geom_text(
+    aes(
+      x = 1.1* sin(midangle),
+      y = 1.1 * cos(midangle),
+      label = labspct
+    ))+coord_fixed() + 
+  facet_wrap(~domtype)+theme_void()
+```
+
