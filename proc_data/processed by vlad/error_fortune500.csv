@@ -1,0 +1,23 @@
+id,website,status_code,dnssec,mx_hosts_hostname,spf_record,spf_valid,dmarc_record,dmarc_valid,dmarc_tags_p_value,dmarc_tags_pct,dmarc_tags_aspf,dmarc_tags_adkim,dmarc_tags_sp,rank,company
+17,www.homedepot.com,403,,,,,,,,,,,,17,Home Depot
+26,www.centene.com,0,,,,,,,,,,,,26,Centene
+35,www.lowes.com,403,,,,,,,,,,,,35,Lowe's
+40,www.humana.com,403,,,,,,,,,,,,40,Humana
+52,www.albertsons.com,403,,,,,,,,,,,,52,Albertsons
+145,www.duke-energy.com,1000,,,,,,,,,,,,145,Duke Energy
+165,www.altria.com,403,,,,,,,,,,,,165,AltriaGroup
+184,www.blackrock.com,403,,,,,,,,,,,,184,BlackRock
+196,stld.steeldynamics.com,0,,,,,,,,,,,,196,Steel Dynamics
+221,www.bjs.com,403,,,,,,,,,,,,221,BJ's Wholesale Club
+240,www.murphyusa.com,403,,,,,,,,,,,,240,Murphy USA
+251,www.amfam.com,403,,,,,,,,,,,,251,American Family Insurance Group
+290,www.carvana.com,1000,,,,,,,,,,,,290,Carvana
+307,www.dickssportinggoods.com,403,,,,,,,,,,,,307,Dick's Sporting Goods
+339,www.auto-owners.com,0,,,,,,,,,,,,339,Auto-Owners Insurance
+387,www.jefferies.com,403,,,,,,,,,,,,387,Jefferies Financial Group
+399,www.graybar.com,1000,,,,,,,,,,,,399,Graybar Electric
+407,www.globalpayments.com,403,,,,,,,,,,,,407,Global Payments
+429,www.mastec.com,0,,,,,,,,,,,,429,MasTec
+445,www.caseys.com,403,,,,,,,,,,,,445,Casey's General Stores
+468,www.brighthousefinancial.com,403,,,,,,,,,,,,468,Brighthouse Financial
+500,www.ameren.com,403,,,,,,,,,,,,500,Ameren

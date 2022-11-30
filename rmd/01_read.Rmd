@@ -53,7 +53,7 @@ free_company_dataset_top_x <- free_company_dataset_top_x %>%
   filter(n() > 300) 
   
   
-# free_company_dataset_top_x %>%  group_by(country) %>% count(sort=T) %>% View()
+free_company_dataset_top_x %>%  group_by(country) %>% count(sort=T) %>% View()
  
 
 
@@ -98,4 +98,7 @@ library("clipr")
 fortune_500 <- read_clip_tbl()
 
 ```
+
+
+
 

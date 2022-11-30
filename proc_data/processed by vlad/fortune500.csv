@@ -1,0 +1,479 @@
+id,website,status_code,dnssec,mx_hosts_hostname,spf_record,spf_valid,dmarc_record,dmarc_valid,dmarc_tags_p_value,dmarc_tags_pct,dmarc_tags_aspf,dmarc_tags_adkim,dmarc_tags_sp,rank,company
+1,www.walmart.com,200,False,"",,False,,False,,,,,,1,Walmart
+2,www.amazon.com,200,False,"",,False,v=DMARC1;p=quarantine;pct=100;rua=mailto:report@dmarc.amazon.com;ruf=mailto:report@dmarc.amazon.com,True,quarantine,100,r,r,quarantine,2,Amazon
+3,www.apple.com,200,False,"",,False,v=DMARC1; p=quarantine; sp=reject; rua=mailto:d@rua.agari.com; ruf=mailto:d@ruf.agari.com;,True,quarantine,100,r,r,reject,3,Apple
+4,www.cvshealth.com,200,False,"",,False,"v=DMARC1; p=reject; fo=1; ri=3600; rua=mailto:aetna@rua.agari.com,mailto:3092ca25c4c2185@rep.dmarcanalyzer.com; ruf=mailto:aetna@ruf.agari.com",True,reject,100,r,r,reject,4,CVS Health
+5,www.unitedhealthgroup.com,200,False,"",,False,,False,,,,,,5,UnitedHealth Group
+6,corporate.exxonmobil.com,200,False,"",,False,"v=DMARC1; p=none; fo=1; rua=mailto:dmarc_rua@emaildefense.proofpoint.com,mailto:dmarcreports@exxonmobil.com; ruf=mailto:dmarcreports@exxonmobil.com",True,none,100,r,r,none,6,Exxon Mobil
+7,www.berkshirehathaway.com,200,False,"",,False,v=DMARC1;p=reject,True,reject,100,r,r,reject,7,Berkshire Hathaway
+8,abc.xyz,200,False,smtp.google.com,v=spf1 include:_spf.google.com ~all,True,v=DMARC1; p=reject; rua=mailto:mailauth-reports@google.com,True,reject,100,r,r,reject,8,Alphabet
+9,www.mckesson.com,200,False,"",,False,"v=DMARC1; p=none; sp=none; adkim=r; aspf=r; fo=1; pct=100; rf=afrf; ri=86400; rua=mailto:mckesson@rua.agari.com,mailto:dmarc_rua@emaildefense.proofpoint.com,mailto:dmarc@mckesson.com; ruf=mailto:mckesson@ruf.agari.com,mailto:dmarc_ruf@emaildefense.proofpoint.com,mailto:dmarc@mckesson.com",True,none,100,r,r,none,9,McKesson
+10,www.amerisourcebergen.com,200,False,"",,False,v=DMARC1; p=none; fo=1;rua=mailto:dmarc_rua@emaildefense.proofpoint.com; ruf=mailto:dmarc_ruf@emaildefense.proofpoint.com,True,none,100,r,r,none,10,AmerisourceBergen
+11,www.costco.com,200,False,"",,False,v=DMARC1; p=none; sp=none; fo=1; rua=mailto:dmarc_rua@emaildefense.proofpoint.com; ruf=mailto:dmarc_ruf@emaildefense.proofpoint.com,True,none,100,r,r,none,11,Costco Wholesale
+12,www.cigna.com,200,False,"",,False,v=DMARC1; p=quarantine; sp=reject; fo=1; rua=mailto:dmarc_rua@emaildefense.proofpoint.com; ruf=mailto:dmarc_ruf@emaildefense.proofpoint.com,True,quarantine,100,r,r,reject,12,Cigna
+13,www.att.com,200,False,"",,False,v=DMARC1; p=none; fo=1; rua=mailto:dmarc_rua@att.com; ruf=mailto:dmarc_ruf@att.com,True,none,100,r,r,none,13,AT&T
+14,www.microsoft.com,200,False,"",,False,v=DMARC1; p=reject; pct=100; rua=mailto:itex-rua@microsoft.com; ruf=mailto:itex-ruf@microsoft.com; fo=1,True,reject,100,r,r,reject,14,Microsoft
+15,www.cardinalhealth.com,200,False,"",,False,v=DMARC1; p=none; rua=mailto:dmarcreports@cardinalhealth.com; ruf=mailto:dmarcreports@cardinalhealth.com,True,none,100,r,r,none,15,Cardinal Health
+16,www.chevron.com,200,False,"",,False,v=DMARC1; p=none; fo=1; ri=3600; rua=mailto:chevron@rua.dmp.cisco.com; ruf=mailto:chevron@ruf.dmp.cisco.com,True,none,100,r,r,none,16,Chevron
+18,www.walgreensbootsalliance.com,200,False,"",,False,v=DMARC1; p=none; fo=1; ri=3600; rua=mailto:walgreens@rua.agari.com; ruf=mailto:walgreens@ruf.agari.com,True,none,100,r,r,none,18,Walgreens Boots Alliance
+19,www.marathonpetroleum.com,200,False,"",,False,v=DMARC1; p=none; fo=1; rua=mailto:dmarc_rua@emaildefense.proofpoint.com; ruf=mailto:dmarc_ruf@emaildefense.proofpoint.com,True,none,100,r,r,none,19,Marathon Petroleum
+20,www.elevancehealth.com,200,False,"",,False,,False,,,,,,20,Elevance Health
+21,www.kroger.com,200,False,"",,False,,False,,,,,,21,Kroger
+22,www.ford.com,200,False,"",,False,"v=DMARC1; p=reject; rua=mailto:dmarc_rua@emaildefense.proofpoint.com,mailto:dmarc_rua@ford.com;ruf=mailto:dmarc_ruf@emaildefense.proofpoint.com,mailto:dmarc_ruf@ford.com; pct=100",True,reject,100,r,r,reject,22,Ford Motor
+23,www.verizon.com,200,False,"",,False,v=DMARC1; p=reject; sp=none; rua=mailto:dmarc_agg@auth.returnpath.net; ruf=mailto:dmarc_afrf@auth.returnpath.net; rf=afrf; pct=100,True,reject,100,r,r,none,23,Verizon Communications
+24,www.jpmorganchase.com,200,False,"",,False,v=DMARC1; p=reject; pct=100; rua=mailto:d@rua.agari.com; ruf=mailto:d@ruf.agari.com; fo=1,True,reject,100,r,r,reject,24,JPMorgan Chase
+25,www.gm.com,200,False,"",,False,"v=DMARC1;p=none;fo=1;ri=3600;rua=mailto:dmarc_rua@emaildefense.proofpoint.com,mailto:dmarc_rua@gm.com;ruf=mailto:dmarc_ruf@emaildefense.proofpoint.com,mailto:dmarc_ruf@gm.com",True,none,100,r,r,none,25,General Motors
+27,about.facebook.com,200,False,"",,False,v=DMARC1; p=reject; rua=mailto:a@dmarc.facebookmail.com; ruf=mailto:fb-dmarc@datafeeds.phishlabs.com; pct=100,True,reject,100,r,r,reject,27,Meta Platforms
+28,corporate.comcast.com,200,True,"",,False,"v=DMARC1;p=reject;fo=1;rua=mailto:dmarc_rua@emaildefense.proofpoint.com,mailto:dmarc-rua@dmarctest.comcast.net;ruf=mailto:dmarc_ruf@emaildefense.proofpoint.com",True,reject,100,r,r,reject,28,Comcast
+29,www.phillips66.com,200,False,"",,False,v=DMARC1; p=none; rua=mailto:dmarc_rua@emaildefense.proofpoint.com; ruf=mailto:dmarc_ruf@emaildefense.proofpoint.com;fo=1,True,none,100,r,r,none,29,Phillips 66
+30,www.valero.com,200,False,"",,False,,False,,,,,,30,Valero Energy
+31,www.dell.com,200,False,"",,False,v=DMARC1; p=reject; fo=1; rua=mailto:dmarc_rua@emaildefense.proofpoint.com; ruf=mailto:dmarc_ruf@emaildefense.proofpoint.com,True,reject,100,r,r,reject,31,Dell Technologies
+32,www.target.com,200,False,"",,False,v=DMARC1; p=none; fo=1; rua=mailto:dmarc_rua@emaildefense.proofpoint.com; ruf=mailto:dmarc_ruf@target.com,True,none,100,r,r,none,32,Target
+33,www.fanniemae.com,200,False,"",,False,v=DMARC1; p=reject; sp=reject; rua=mailto:dmarc_agg@vali.email; fo=1,True,reject,100,r,r,reject,33,Fannie Mae
+34,www.ups.com,200,False,"",,False,v=DMARC1; p=reject; rua=mailto:dmarc_rua@emaildefense.proofpoint.com;ruf=mailto:dmarc_ruf@emaildefense.proofpoint.com; fo=1,True,reject,100,r,r,reject,34,UPS
+36,www.bankofamerica.com,200,False,"",,False,v=DMARC1; p=reject; fo=1; rua=mailto:auth.report_ns@bankofamerica.com; ruf=mailto:bankofamerica@ruf.agari.com,True,reject,100,r,r,reject,36,Bank of America
+37,www.jnj.com,200,False,"",,False,v=DMARC1; p=reject; sp=reject; fo=1; ri=3600; rua=mailto:jnj@rua.dmp.cisco.com; ruf=mailto:jnj@ruf.dmp.cisco.com,True,reject,100,r,r,reject,37,Johnson & Johnson
+38,www.adm.com,200,False,"",,False,v=DMARC1; p=none; rua=mailto:dmarc_agg@vali.email;,True,none,100,r,r,none,38,Archer Daniels Midland
+39,www.fedex.com,200,False,"",,False,,False,,,,,,39,FedEx
+41,www.wellsfargo.com,200,False,"",,False,v=DMARC1; p=reject; sp=none; fo=1; rua=mailto:dmarc_agg@auth.returnpath.net; ruf=mailto:dmarc_afrf@auth.returnpath.net; rf=afrf; pct=100,True,reject,100,r,r,none,41,Wells Fargo
+42,www.statefarm.com,200,False,"",,False,v=DMARC1; p=reject; rua=mailto:state-farm@rua.dmp.cisco.com; ruf=mailto:state-farm@ruf.dmp.cisco.com,True,reject,100,r,r,reject,42,State Farm Insurance
+43,www.pfizer.com,200,False,"",,False,"v=DMARC1; p=reject; fo=1; rua=mailto:dmarc_rua@emaildefense.proofpoint.com,mailto:dmarc.rua@pfizer.com; ruf=mailto:dmarc_ruf@emaildefense.proofpoint.com,mailto:dmarc.ruf@pfizer.com",True,reject,100,r,r,reject,43,Pfizer
+44,www.citigroup.com,200,False,"",,False,"v=DMARC1; p=reject; rua=mailto:dmarc_rua@emaildefense.proofpoint.com,mailto:dmarc.reports.rua@citi.com",True,reject,100,r,r,reject,44,Citigroup
+45,www.pepsico.com,200,False,"",,False,v=DMARC1;p=none;fo=1;rua=mailto:itdmarcnotifications@pepsico.com;ruf=mailto:itdmarcnotifications@pepsico.com;rf=afrf;pct=100,True,none,100,r,r,none,45,PepsiCo
+46,www.intel.com,200,False,"",,False,v=DMARC1;p=none;sp=none;fo=1;rua=mailto:dmarc.notification@intel.com,True,none,100,r,r,none,46,Intel
+47,www.pg.co.uk,200,False,"",,False,v=DMARC1; p=none; fo=1; ri=3600; rua=mailto:procter-gamble@rua.dmp.cisco.com; ruf=mailto:procter-gamble@ruf.dmp.cisco.com,True,none,100,r,r,none,47,Procter & Gamble
+48,www.ge.com,200,False,"",,False,v=DMARC1; p=none; fo=1; rua=mailto:dmarc_rua@emaildefense.proofpoint.com; ruf=mailto:dmarc_ruf@emaildefense.proofpoint.com,True,none,100,r,r,none,48,General Electric
+49,www.ibm.com,200,False,"",,False,v=DMARC1; p=none; fo=1; rua=mailto:dmarc_rua@emaildefense.proofpoint.com; ruf=mailto:dmarc_ruf@emaildefense.proofpoint.com,True,none,100,r,r,none,49,IBM
+50,www.metlife.com,200,False,"",,False,v=DMARC1;p=reject;sp=none;fo=1;ri=3600;rua=mailto:metlife@rua.dmp.cisco.com;ruf=mailto:metlife@ruf.dmp.cisco.com,True,reject,100,r,r,none,50,MetLife
+51,www.prudential.com,200,False,"",,False,,False,,,,,,51,Prudential Financial
+53,thewaltdisneycompany.com,200,False,generalsmtp.disney.com,v=spf1 include:mail.zendesk.com ?all,True,,False,,,,,,53,Walt Disney
+54,www.energytransfer.com,200,False,"",,False,"v=DMARC1; p=quarantine; rua=mailto:dvhqyvy8@ag.dmarcian.com, mailto:dmarc@energytransfer.com; ruf=mailto:dvhqyvy8@fr.dmarcian.com;",True,quarantine,100,r,r,quarantine,54,Energy Transfer
+55,www.lockheedmartin.com,200,False,"",,False,,False,,,,,,55,Lockheed Martin
+56,www.freddiemac.com,200,False,"",,False,,False,,,,,,56,Freddie Mac
+57,www.goldmansachs.com,200,False,"",,False,v=DMARC1; p=reject; rua=mailto:dmarc_rua@emaildefense.proofpoint.com; ruf=mailto:dmarc_ruf@emaildefense.proofpoint.com; fo=1,True,reject,100,r,r,reject,57,Goldman Sachs Group
+58,www.rtx.com,200,True,"",,False,v=DMARC1; p=reject; rua=mailto:dmarc_rua@emaildefense.proofpoint.com; ruf=mailto:dmarc_ruf@emaildefense.proofpoint.com;fo=1,True,reject,100,r,r,reject,58,Raytheon Technologies
+59,www.hp.com,200,False,"",,False,v=DMARC1; p=reject; sp=reject; pct=100; fo=1; rua=mailto:l1rcsnp0@ag.dmarcian.com; ruf=mailto:l1rcsnp0@fr.dmarcian.com;,True,reject,100,r,r,reject,59,HP
+60,www.boeing.com,200,False,"",,False,v=DMARC1;p=none;pct=100;rua=mailto:dmarcreports@boeing.com,True,none,100,r,r,none,60,Boeing
+61,www.morganstanley.com,200,False,"",,False,v=DMARC1; p=none; fo=1; rua=mailto:dmarc_rua@emaildefense.proofpoint.com; ruf=mailto:dmarc_ruf@emaildefense.proofpoint.com;,True,none,100,r,r,none,61,Morgan Stanley
+62,www.abbvie.com,200,False,"",,False,"v=DMARC1; p=quarantine; fo=1; pct=100; ri=14400; rua=mailto:abbvie@rua.dmp.cisco.com,mailto:ECS.Messaging.Reports@abbvie.com; ruf=mailto:abbvie@ruf.dmp.cisco.com,mailto:ECS.Messaging.Reports@abbvie.com",True,quarantine,100,r,r,quarantine,62,HCAHealthcare
+63,www.abbvie.com,200,False,"",,False,"v=DMARC1; p=quarantine; fo=1; pct=100; ri=14400; rua=mailto:abbvie@rua.dmp.cisco.com,mailto:ECS.Messaging.Reports@abbvie.com; ruf=mailto:abbvie@ruf.dmp.cisco.com,mailto:ECS.Messaging.Reports@abbvie.com",True,quarantine,100,r,r,quarantine,63,AbbVie
+64,www.dow.com,200,False,"",,False,v=DMARC1; p=quarantine; rua=mailto:fglsmtp@dow.com,True,quarantine,100,r,r,quarantine,64,Dow
+65,www.tesla.com,200,False,"",,False,v=DMARC1; p=reject; pct=100; rua=mailto:n2ju30bc@ag.dmarcian.com; ruf=mailto:n2ju30bc@fr.dmarcian.com; fo=1,True,reject,100,r,r,reject,65,Tesla
+66,www.allstate.com,200,False,"",,False,v=DMARC1; p=none; fo=1; rua=mailto:5fd5ee16@mxtoolbox.dmarc-report.com; ruf=mailto:5fd5ee16@forensics.dmarc-report.com,True,none,100,r,r,none,66,Allstate
+67,www.aig.com,200,False,"",,False,v=DMARC1; p=reject; fo=1; ri=3600; rua=mailto:aig@rua.agari.com; ruf=mailto:aig@ruf.agari.com,True,reject,100,r,r,reject,67,AIG
+68,www.bestbuy.com,200,False,"",,False,v=DMARC1; p=quarantine; fo=1; rua=mailto:dmarc_rua@emaildefense.proofpoint.com; ruf=mailto:dmarc_ruf@emaildefense.proofpoint.com,True,quarantine,100,r,r,quarantine,68,Best Buy
+69,corporate.charter.com,200,False,"",,False,,False,,,,,,69,Charter Communications
+70,www.sysco.com,200,False,"",,False,v=DMARC1; p=none; fo=1; rua=mailto:dmarc_rua@emaildefense.proofpoint.com; ruf=mailto:dmarc_ruf@emaildefense.proofpoint.com,True,none,100,r,r,none,70,Sysco
+71,www.merck.com,200,False,"",,False,v=DMARC1; p=reject; fo=1; ri=3600; rua=mailto:merck@rua.agari.com; ruf=mailto:merck@ruf.agari.com,True,reject,100,r,r,reject,71,Merck
+72,www.newyorklife.com,200,False,"",,False,v=DMARC1; p=none; rua=mailto:d@rua.agari.com; ruf=mailto:d@ruf.agari.com; fo=1,True,none,100,r,r,none,72,New York Life Insurance
+73,www.caterpillar.com,200,False,"",,False,,False,,,,,,73,Caterpillar
+74,www.cisco.com,200,False,"",,False,v=DMARC1; p=quarantine; pct=0; fo=1; ri=3600; rua=mailto:ynldvgsr@ag.dmarcian.com; ruf=mailto:ynldvgsr@fr.dmarcian.com;,True,quarantine,0,r,r,quarantine,74,Cisco Systems
+75,www.tjx.com,200,False,"",,False,v=DMARC1; p=reject; rua=mailto:dmarc_rua@emaildefense.proofpoint.com; ruf=mailto:dmarc_ruf@emaildefense.proofpoint.com; rf=afrf; pct=100; ri=86400; fo=1,True,reject,100,r,r,reject,75,TJX
+76,www.publix.com,200,False,"",,False,v=DMARC1; p=quarantine; fo=1; rua=mailto:secops@publix.com; ruf=mailto:secops@publix.com,True,quarantine,100,r,r,quarantine,76,Publix Super Markets
+77,www.conocophillips.com,200,False,"",,False,v=DMARC1; p=none; fo=1; rua=mailto:dmarc.rua@conocophillips.com;ruf=mailto:dmarc.ruf@conocophillips.com,True,none,100,r,r,none,77,ConocoPhillips
+78,www.libertymutualgroup.com,200,False,"",,False,,False,,,,,,78,Liberty Mutual Insurance Group
+79,www.progressive.com,200,False,"",,False,,False,,,,,,79,Progressive
+80,www.nationwide.com,200,False,"",,False,v=DMARC1;p=none;fo=1;rua=mailto:dmarcrua@nationwide.com;ruf=mailto:dmarcruf@nationwide.com,True,none,100,r,r,none,80,Nationwide
+81,www.tysonfoods.com,200,False,"",,False,"v=DMARC1; p=reject; fo=1; rua=mailto:dmarc_rua@emaildefense.proofpoint.com,mailto:svc-dmarc@tyson.com; ruf=mailto:dmarc_ruf@emaildefense.proofpoint.com,mailto:svc-dmarc@tyson.com",True,reject,100,r,r,reject,81,Tyson Foods
+82,www.bms.com,200,False,"",,False,,False,,,,,,82,Bristol-Myers Squibb
+83,www.nike.com,200,False,"",,False,v=DMARC1; p=none; fo=1; rua=mailto:dmarc_rua@emaildefense.proofpoint.com; ruf=mailto:dmarc_ruf@emaildefense.proofpoint.com,True,none,100,r,r,none,83,Nike
+84,www.deere.com,200,False,"",,False,v=DMARC1;p=reject;fo=1;ri=86400;rua=mailto:dmarc_rua@johndeere.com;ruf=mailto:dmarc_ruf@johndeere.com,True,reject,100,r,r,reject,84,Deere
+85,www.americanexpress.com,200,False,"",,False,v=DMARC1; p=reject; fo=1; rua=mailto:dmarc_agg@auth.returnpath.net; ruf=mailto:dmarc_afrf@auth.returnpath.net,True,reject,100,r,r,reject,85,American Express
+86,www.abbott.com,200,False,"",,False,v=DMARC1; p=none; fo=1; rua=mailto:dmarc_rua@emaildefense.proofpoint.com; ruf=mailto:dmarc_ruf@emaildefense.proofpoint.com,True,none,100,r,r,none,86,Abbott Laboratories
+87,www.stonex.com,200,False,"",,False,v=DMARC1; p=reject; fo=1; rua=mailto:dmarc_rua@emaildefense.proofpoint.com; ruf=mailto:dmarc_ruf@emaildefense.proofpoint.com,True,reject,100,r,r,reject,87,StoneX Group
+88,www.plains.com,200,False,"",,False,,False,,,,,,88,Plains GP Holdings
+89,www.enterpriseproducts.com,200,False,"",,False,,False,,,,,,89,Enterprise Products
+90,www.tiaa.org,200,False,"",,False,v=DMARC1; p=none; fo=1; ri=3600; rua=mailto:tiaa@rua.agari.com; ruf=mailto:tiaa@ruf.agari.com,True,none,100,r,r,none,90,TIAA
+91,www.oracle.com,200,False,"",,False,v=DMARC1;p=none;rua=mailto:dmarc_rua@emaildefense.proofpoint.com;ruf=mailto:dmarc_ruf@emaildefense.proofpoint.com;fo=1,True,none,100,r,r,none,91,Oracle
+92,www.thermofisher.com,200,False,"",,False,v=DMARC1; p=none; fo=1; rua=mailto:dmarc_rua@emaildefense.proofpoint.com; ruf=mailto:dmarc_ruf@emaildefense.proofpoint.com,True,none,100,r,r,none,92,Thermo Fisher Scientific
+93,www.coca-colacompany.com,200,False,"",,False,"v=DMARC1; p=reject; pct=100; fo=1; rua=mailto:dmarc_rua@emaildefense.proofpoint.com,mailto:dmarcreports@coca-cola.com; ruf=mailto:dmarc_ruf@emaildefense.proofpoint.com,mailto:dmarcreports@coca-cola.com",True,reject,100,r,r,reject,93,Coca-Cola
+94,www.gd.com,200,False,"",,False,,False,,,,,,94,General Dynamics
+95,www.chsinc.com,200,False,"",,False,v=DMARC1; p=reject; fo=1; rua=mailto:dmarc_rua@emaildefense.proofpoint.com; ruf=mailto:dmarc_ruf@emaildefense.proofpoint.com,True,reject,100,r,r,reject,95,CHS
+96,www.usaa.com,200,True,"",,False,v=DMARC1; p=reject; fo=1; rua=mailto:dmarc_agg@auth.returnpath.net; ruf=mailto:dmarc_afrf@auth.returnpath.net,True,reject,100,r,r,reject,96,USAA
+97,www.northwesternmutual.com,200,False,"",,False,v=DMARC1;p=reject;sp=quarantine;fo=1;ri=3600;rua=mailto:dmarc_rua@emaildefense.proofpoint.com;ruf=mailto:dmarc_ruf@emaildefense.proofpoint.com,True,reject,100,r,r,quarantine,97,Northwestern Mutual
+98,www.nucor.com,200,False,"",,False,v=DMARC1; p=reject; fo=1; rua=mailto:dmarc_rua@emaildefense.proofpoint.com; ruf=mailto:dmarc_ruf@emaildefense.proofpoint.com,True,reject,100,r,r,reject,98,Nucor
+99,www.exeloncorp.com,200,False,"",,False,v=DMARC1; p=none; rua=mailto:postmaster@exeloncorp.com,True,none,100,r,r,none,99,Exelon
+100,www.massmutual.com,200,False,"",,False,v=DMARC1; p=reject; fo=1; pct=100; ri=3600; rua=mailto:massmutual@rua.agari.com; ruf=mailto:massmutual@ruf.agari.com,True,reject,100,r,r,reject,100,Massachusetts Mutual Life
+101,www.northropgrumman.com,200,False,"",,False,,False,,,,,,101,Northrop Grumman
+102,www.3m.com,200,False,"",,False,v=DMARC1; p=quarantine; fo=1; ri=3600; rua=mailto:3m@rua.dmp.cisco.com; ruf=mailto:3m@ruf.dmp.cisco.com,True,quarantine,100,r,r,quarantine,102,3M
+103,www.travelers.com,200,False,"",,False,,False,,,,,,103,Travelers
+104,www.arrow.com,200,False,"",,False,v=DMARC1; p=quarantine; rua=mailto:rywdzx3h@ag.dmarcian.com; pct=100;,True,quarantine,100,r,r,quarantine,104,Arrow Electronics
+105,www.honeywell.com,200,False,"",,False,v=DMARC1; p=reject; sp=none; adkim=r; aspf=r; fo=1; pct=100; rf=afrf; ri=3600; rua=mailto:honeywell@rua.agari.com; ruf=mailto:honeywell@ruf.agari.com,True,reject,100,r,r,none,105,Honeywell International
+106,www.dollargeneral.com,200,False,"",,False,v=DMARC1; p=none; rua=mailto:dmarc_rua@emaildefense.proofpoint.com; ruf=mailto:dmarc_ruf@emaildefense.proofpoint.com;fo=1,True,none,100,r,r,none,106,Dollar General
+107,www.qualcomm.com,200,False,"",,False,v=DMARC1; p=none; sp=reject; fo=1; rua=mailto:dmarc_rua@emaildefense.proofpoint.com; ruf=mailto:dmarc_ruf@emaildefense.proofpoint.com;,True,none,100,r,r,reject,107,Qualcomm
+108,www.capitalone.com,200,False,"",,False,v=DMARC1; p=reject; fo=1; ri=3600; rua=mailto:capital-one@rua.agari.com; ruf=mailto:capital-one@ruf.agari.com,True,reject,100,r,r,reject,108,Capital One Financial
+109,www.tdsynnex.com,200,False,"",,False,v=DMARC1; p=reject; rua=mailto:o0ljpdxs@ag.eu.dmarcadvisor.com; ruf=mailto:o0ljpdxs@fr.eu.dmarcadvisor.com; fo=1,True,reject,100,r,r,reject,109,TD Synnex
+110,www.pmi.com,200,False,"",,False,v=DMARC1; p=reject; adkim=s; aspf=s; pct=100; fo=1; rua=mailto:9a57f3e7816e407@rep.dmarcanalyzer.com; ruf=mailto:9a57f3e7816e407@rep.dmarcanalyzer.com;,True,reject,100,s,s,reject,110,Philip Morris Internationé
+111,www.wfscorp.com,200,False,"",,False,v=DMARC1; p=reject; fo=1; ri=3600; rua=mailto:tenant.admin@worldfuelservices.onmicrosoft.com; ruf=mailto:tenant.admin@worldfuelservices.onmicrosoft.com,True,reject,100,r,r,reject,111,World Fuel Services
+112,www.pfgc.com,200,False,"",,False,v=DMARC1; p=none; rua=mailto:PFGDMARCReports@pfgc.com,True,none,100,r,r,none,112,Performance Food Group
+113,www.delta.com,200,False,"",,False,v=DMARC1; p=reject; fo=1; rua=mailto:dmarc_rua@emaildefense.proofpoint.com; ruf=mailto:dmarc_ruf@emaildefense.proofpoint.com,True,reject,100,r,r,reject,113,Delta Air Lines
+114,www.aa.com,200,False,"",,False,"v=DMARC1; p=reject; sp=reject; fo=1; ri=3600; rua=mailto:american@rua.agari.com,mailto:dmarc@aa.com; ruf=mailto:american@ruf.agari.com,mailto:dmarc@aa.com",True,reject,100,r,r,reject,114,American Airlines Group
+115,www.netflix.com,200,False,"",,False,,False,,,,,,115,Netflix
+116,www.paramount.com,200,False,"",,False,,False,,,,,,116,Paramount Global
+117,www.usfoods.com,200,False,"",,False,v=DMARC1; p=none; rua=mailto:dmarc_agg@vali.email,True,none,100,r,r,none,117,US Foods Holding
+118,www.danaher.com,200,False,"",,False,v=DMARC1; p=reject; fo=1; rua=mailto:dmarc_rua@emaildefense.proofpoint.com; ruf=mailto:dmarc_ruf@emaildefense.proofpoint.com,True,reject,100,r,r,reject,118,Danaher
+119,www.jabil.com,200,False,"",,False,v=DMARC1; p=quarantine; rua=mailto:DMARC_reporting@jabil.com; ruf=mailto:DMARC_reporting@jabil.com; pct=100; fo=1:d:s,True,quarantine,100,r,r,quarantine,119,Jabil
+120,www.starbucks.com,200,False,"",,False,v=DMARC1; p=reject; sp=none; fo=1; ri=3600; rua=mailto:aggrep@starbucks.com; ruf=mailto:authfail@starbucks.com;,True,reject,100,r,r,none,120,Starbucks
+121,www.mondelezinternational.com,200,False,"",,False,v=DMARC1; p=reject; fo=1; rua=mailto:dmarc_rua@emaildefense.proofpoint.com; ruf=mailto:dmarc_ruf@emaildefense.proofpoint.com,True,reject,100,r,r,reject,121,Mondelez International
+122,www.lilly.com,200,False,"",,False,v=DMARC1;p=reject;pct=100;rua=mailto:lilly@rua.dmp.cisco.com,True,reject,100,r,r,reject,122,EliLilly
+123,www.hpe.com,200,False,"",,False,v=DMARC1; p=none; rua=mailto:dmarc_rua@emaildefense.proofpoint.com; ruf=mailto:dmarc_ruf@emaildefense.proofpoint.com; fo=1,True,none,100,r,r,none,123,Hewlett Packard Enterpri
+124,www.drhorton.com,200,False,"",,False,v=DMARC1; p=none; rua=mailto:exchangedmarc@drhorton.com; ruf=mailto:exchangedmarc@drhorton.com,True,none,100,r,r,none,124,D.R. Horton
+125,www.molinahealthcare.com,200,False,"",,False,v=DMARC1; p=reject; fo=1; rua=mailto:dmarc_rua@emaildefense.proofpoint.com;ruf=mailto:dmarc_ruf@emaildefense.proofpoint.com,True,reject,100,r,r,reject,125,Molina Healthcare
+126,www.cbre.com,200,False,"",,False,"v=DMARC1; p=reject; fo=1; pct=100; rua=mailto:dmarc_agg@auth.returnpath.net,mailto:us_svc_dmarc@cbre.com; ruf=mailto:dmarc_afrf@auth.returnpath.net",True,reject,100,r,r,reject,126,CBRE Group
+127,www.micron.com,200,False,"",,False,,False,,,,,,127,Micron Technology
+128,www.broadcom.com,200,True,"",,False,"v=DMARC1; p=quarantine; pct=100; rua=mailto:dmarc_agg@vali.email,mailto:dmarc-admin.pdl-it@broadcom.com; ruf=mailto:dmarc-ruf-admin.pdl@broadcom.com",True,quarantine,100,r,r,quarantine,128,Broadcom
+129,www.gilead.com,200,True,"",,False,"v=DMARC1; p=none; pct=100; fo=1; rua=mailto:dmarcreport@gilead.com,mailto:dmarc_rua@emaildefense.proofpoint.com; ruf=mailto:dmarc_ruf@emaildefense.proofpoint.com",True,none,100,r,r,none,129,Gilead Sciences
+130,www.pbfenergy.com,200,False,"",,False,"v=DMARC1;p=none;fo=1;rua=mailto:dmarc_rua@emaildefense.proofpoint.com,mailto:pbfpostmaster@pbfenergy.com;ruf=mailto:dmarc_ruf@emaildefense.proofpoint.com,mailto:pbfpostmaster@pbfenergy.com",True,none,100,r,r,none,130,PBF Energy
+131,www.lennar.com,200,False,"",,False,v=DMARC1;p=none;fo=1;rua=mailto:dmarc_rua@emaildefense.proofpoint.com;ruf=mailto:dmarc_ruf@emaildefense.proofpoint.com,True,none,100,r,r,none,131,Lennar
+132,www.unfi.com,200,True,"",,False,v=DMARC1; p=none; fo=1; rua=mailto:dmarc_rua@emaildefense.proofpoint.com; ruf=mailto:dmarc_ruf@emaildefense.proofpoint.com,True,none,100,r,r,none,132,United Natural Foods
+133,www.nrg.com,200,False,"",,False,"v=DMARC1; p=none; fo=1;rua=mailto:dmarc_rua@emaildefense.proofpoint.com,mailto:dmarc_aggdata@nrg.com; ruf=mailto:dmarc_ruf@emaildefense.proofpoint.com,mailto:dmarc_forensic@nrg.com",True,none,100,r,r,none,133,NRG Energy
+134,www.nvidia.com,200,False,"",,False,v=DMARC1; p=reject; rua=mailto:dmarc_agg@vali.email; fo=1; ri=3600,True,reject,100,r,r,reject,134,Nvidia
+135,www.oxy.com,200,False,"",,False,,False,,,,,,135,Occidental Petroleum
+136,www.salesforce.com,200,True,"",,False,"v=DMARC1;p=reject;pct=100;fo=1;ruf=mailto:d@ruf.agari.com,mailto:dmarc_ruf@emaildefense.proofpoint.com;rua=mailto:d@rua.agari.com,mailto:dmarc_rua@emaildefense.proofpoint.com,mailto:dmarc_agg@vali.email",True,reject,100,r,r,reject,136,Salesforce
+137,www.dollartree.com,200,False,"",,False,v=DMARC1; p=none; rua=mailto:dmarcreports@dollartree.com; ruf=mailto:dmarcforensicsreports@dollartree.com,True,none,100,r,r,none,137,Dollar Tree
+138,www.kkr.com,200,False,"",,False,v=DMARC1; p=none; fo=1; rua=mailto:dmarc_rua@emaildefense.proofpoint.com; ruf=mailto:dmarc_ruf@emaildefense.proofpoint.com,True,none,100,r,r,none,138,KKR
+139,www.kraftheinzcompany.com,200,False,"",,False,v=DMARC1; p=reject; fo=1; rua=mailto:dmarc_rua@emaildefense.proofpoint.com; ruf=mailto:dmarc_ruf@emaildefense.proofpoint.com,True,reject,100,r,r,reject,139,Kraft Heinz
+140,www.amgen.com,200,False,"",,False,v=DMARC1;p=reject;sp=none;fo=1;ri=3600;rua=mailto:amgen@rua.agari.com;ruf=mailto:amgen@ruf.agari.com,True,reject,100,r,r,none,140,Amgen
+141,www.autonation.com,200,False,"",,False,,False,,,,,,141,AutoNation
+142,www.penskeautomotive.com,200,False,"",,False,v=DMARC1;p=none;fo=1;rua=mailto:dmarc_rua@emaildefense.proofpoint.com;ruf=mailto:dmarc_ruf@emaildefense.proofpoint.com,True,none,100,r,r,none,142,Penske Automotive Group
+143,www.paypal.com,200,True,"",,False,v=DMARC1; p=reject; rua=mailto:d@rua.agari.com; ruf=mailto:d@ruf.agari.com,True,reject,100,r,r,reject,143,PayPal Holdings
+144,www.macys.com,200,False,"",,False,"v=DMARC1;p=reject;fo=1;rua=mailto:dmarc_rua@emaildefense.proofpoint.com,mailto:macysdmarc@macys.com;ruf=mailto:dmarc_ruf@emaildefense.proofpoint.com",True,reject,100,r,r,reject,144,Macy's
+146,ir.united.com,200,False,"",,False,v=DMARC1; p=reject; fo=1; rua=mailto:dmarc_rua@emaildefense.proofpoint.com; ruf=mailto:dmarc_ruf@emaildefense.proofpoint.com; rf=afrf; pct=100;,True,reject,100,r,r,reject,146,United Airlines Holdings
+147,www.visa.com,200,False,"",,False,v=DMARC1; p=quarantine; sp=quarantine; fo=1; rua=mailto:dmarc_agg@auth.returnpath.net; ruf=mailto:dmarc_afrf@auth.returnpath.net; rf=afrf;,True,quarantine,100,r,r,quarantine,147,Visa
+148,www.riteaid.com,200,False,"",,False,v=DMARC1; p=none; rua=mailto:dmarc_rua@emaildefense.proofpoint.com; ruf=mailto:dmarc_ruf@emaildefense.proofpoint.com;fo=1,True,none,100,r,r,none,148,Rite Aid
+149,www.cummins.com,200,False,"",,False,v=DMARC1; p=none; rua=mailto:dmarc@cummins.com;ruf=mailto:dmarc@cummins.com,True,none,100,r,r,none,149,Cummins
+150,www.usbank.com,200,False,"",,False,v=DMARC1;p=reject;rua=mailto:us-bank@rua.agari.com;ruf=mailto:us-bank@ruf.agari.com;fo=1,True,reject,100,r,r,reject,150,U.S. Bancorp
+151,www.paccar.com,200,False,"",,False,v=DMARC1; p=reject; fo=1; ri=3600; rua=mailto:paccar@rua.agari.com; ruf=mailto:paccar@ruf.agari.com,True,reject,100,r,r,reject,151,Paccar
+152,www.mcdonalds.com,200,False,"",,False,v=DMARC1; p=none; rua=mailto:dmarc_agg@dmarc.everest.email; fo=1; pct=100; rf=afrf,True,none,100,r,r,none,152,McDonald's
+153,www.southernrailway.com,200,False,"",,False,v=DMARC1; p=reject; rua=mailto:dmarc_rua@emaildefense.proofpoint.com; ruf=mailto:dmarc_rua@emaildefense.proofpoint.com,True,reject,100,r,r,reject,153,Southern
+154,www.chrobinson.com,200,False,"",,False,v=DMARC1;p=reject;sp=none;fo=1;ri=3600;rua=mailto:ch-robinson-worldwide@rua.dmp.cisco.com;ruf=mailto:ch-robinson-worldwide@ruf.dmp.cisco.com,True,reject,100,r,r,none,154,C.H. Robinson Worldwide
+155,www.truist.com,200,False,"",,False,v=DMARC1;p=reject;fo=1;rua=mailto:dmarc_rua@emaildefense.proofpoint.com;ruf=mailto:dmarc_ruf@emaildefense.proofpoint.com,True,reject,100,r,r,reject,155,Truist Financial
+156,www.appliedmaterials.com,200,True,"",,False,"v=DMARC1; p=reject; fo=1; pct=100; ri=3600; sp=none; rua=mailto:appliedmaterials@rua.agari.com,mailto:DMARC_Report@amat.com; ruf=mailto:appliedmaterials@ruf.agari.com,mailto:DMARCFore_Report@amat.com",True,reject,100,r,r,none,156,Applied Materials
+157,www.fcx.com,200,False,"",,False,v=DMARC1; p=reject; fo=1; rua=mailto:dmarc_rua@emaildefense.proofpoint.com; ruf=mailto:dmarc_ruf@emaildefense.proofpoint.com,True,reject,100,r,r,reject,157,Freeport-McMoRan
+158,www.lithia.com,200,False,"",,False,v=DMARC1; p=quarantine; rua=mailto:rl6624mtjy@rua.powerdmarc.com; ruf=mailto:rl6624mtjy@ruf.powerdmarc.com; pct=100;,True,quarantine,100,r,r,quarantine,158,Lithia Motors
+159,www.blackstone.com,200,False,"",,False,v=DMARC1; p=reject; fo=1; rua=mailto:dmarc_rua@emaildefense.proofpoint.com; ruf=mailto:dmarc_ruf@emaildefense.proofpoint.com;,True,reject,100,r,r,reject,159,Blackstone
+160,www.thehartford.com,200,False,"",,False,,False,,,,,,160,Hartford Financial Services Group
+161,www.aflac.com,200,False,"",,False,v=DMARC1; p=reject; fo=1; ri=3600; rua=mailto:dmarc_rua@emaildefense.proofpoint.com; ruf=mailto:dmarc_ruf@emaildefense.proofpoint.com,True,reject,100,r,r,reject,161,Aflac
+162,www.whirlpoolindia.com,200,False,"",,False,v=DMARC1; p=none; rua=mailto:gawp41cm@ag.dmarcian.com,True,none,100,r,r,none,162,Whirlpool
+163,www.up.com,200,False,"",,False,v=DMARC1; p=quarantine; pct=100; rua=mailto:dmarcreporting@up.com; ruf=mailto:dmarcreporting@up.com; fo=1,True,quarantine,100,r,r,quarantine,163,Union Pacific
+164,www.internationalpaper.com,200,False,"",,False,,False,,,,,,164,International Paper
+166,www.cdw.com,200,True,"",,False,v=DMARC1; p=none; fo=1; rua=mailto:dmarc_rua@emaildefense.proofpoint.com; ruf=mailto:dmarc_ruf@emaildefense.proofpoint.com,True,none,100,r,r,none,166,CDW
+167,www.manpowergroup.com,200,False,"",,False,v=DMARC1; p=none; rua=mailto:fb26d7ff24f5417@rep.dmarcanalyzer.com; ruf=mailto:fb26d7ff24f5417@for.dmarcanalyzer.com; fo=1; sp=reject;,True,none,100,r,r,reject,167,ManpowerGroup
+168,www.pgecorp.com,200,False,"",,False,,False,,,,,,168,PG&E
+169,www.corporate.carrier.com,200,False,"",,False,v=DMARC1; p=reject; fo=1; rua=mailto:dmarc_rua@emaildefense.proofpoint.com; ruf=mailto:dmarc_ruf@emaildefense.proofpoint.com,True,reject,100,r,r,reject,169,Carrier Global
+170,www.bakerhughes.com,200,False,"",,False,"v=DMARC1; p=reject; rua=mailto:dmarc_agg@vali.email,mailto:dmarc.rua.reports@bakerhughes.com; ruf=mailto:dmarc.ruf.reports@bakerhughes.com",True,reject,100,r,r,reject,170,Baker Hughes
+171,www.clevelandcliffs.com,200,False,"",,False,v=DMARC1; p=reject; fo=1; rua=mailto:dmarc_rua@emaildefense.proofpoint.com; ruf=mailto:dmarc_ruf@emaildefense.proofpoint.com,True,reject,100,r,r,reject,171,Cleveland-Cliffs
+172,www.ussteel.com,200,False,"",,False,v=DMARC1; p=reject; rua=mailto:dmarc-rua@uss.com; ruf=mailto:dmarc-ruf@uss.com,True,reject,100,r,r,reject,172,United States Steel
+173,www.bd.com,200,False,"",,False,v=DMARC1; p=reject; fo=1; rua=mailto:dmarc_rua@emaildefense.proofpoint.com; ruf=mailto:dmarc_ruf@emaildefense.proofpoint.com,True,reject,100,r,r,reject,173,Becton Dickinson
+174,www.carmax.com,200,False,"",,False,v=DMARC1; p=reject; fo=1; rua=mailto:dmarc_rua@emaildefense.proofpoint.com; ruf=mailto:dmarc_ruf@emaildefense.proofpoint.com,True,reject,100,r,r,reject,174,CarMax
+175,www.sherwin-williams.com,200,False,"",,False,v=DMARC1;p=reject;rua=mailto:7qfjzpkl@ag.dmarcian.com;ruf=mailto:7qfjzpkl@fr.dmarcian.com;fo=1,True,reject,100,r,r,reject,175,Sherwin-Williams
+176,www.bldr.com,200,False,"",v=spf1 include:_spfb.bldr.com include:sendgrid.net include:aspmx.pardot.com include:us._netblocks.mimecast.com include:_spf.salesforce.com include:spf.fieldconnect.field2base.com include:_spf-dc8.successfactors.com ~all,True,v=DMARC1;p=quarantine;rua=mailto:e96ef672a9ce971@rep.dmarcanalyzer.com;ruf=mailto:e96ef672a9ce971@for.dmarcanalyzer.com;pct=100;sp=none;fo=1:d;,True,quarantine,100,r,r,none,176,Builders FirstSource
+177,www.marsh.com,200,True,"",,False,v=DMARC1; p=reject; rua=mailto:dmarc_agg@vali.email; fo=1; ri=3600,True,reject,100,r,r,reject,177,Marsh & McLennan
+178,www.pnc.com,200,False,"",,False,v=DMARC1; p=reject; fo=1; rua=mailto:dmarc_rua@emaildefense.proofpoint.com; ruf=mailto:dmarc_ruf@emaildefense.proofpoint.com,True,reject,100,r,r,reject,178,PNC Financial Services
+179,www.lumen.com,200,False,"",,False,v=DMARC1; p=reject; rua=mailto:eoul3qkc@ag.dmarcian.com;,True,reject,100,r,r,reject,179,Lumen Technologies
+180,www.avnet.com,200,False,"",,False,v=DMARC1;p=none;rua=mailto:dmarc@avnet.eu,True,none,100,r,r,none,180,Avnet
+181,www.tenethealth.com,200,False,"",,False,v=DMARC1; p=none; fo=1; rua=mailto:dmarc_rua@emaildefense.proofpoint.com; ruf=mailto:dmarc_ruf@emaildefense.proofpoint.com,True,none,100,r,r,none,181,Tenet Healthcare
+182,www.kimberly-clark.com,200,False,"",,False,,False,,,,,,182,Kimberly-Clark
+183,www.kohls.com,200,False,"",,False,v=DMARC1; p=reject; rua=mailto:dmarc@kohls.com,True,reject,100,r,r,reject,183,Kohl's
+185,www.us.jll.com,200,False,"",,False,v=DMARC1; p=reject; rua=mailto:dmarc_agg@vali.email; fo=1,True,reject,100,r,r,reject,185,Jones Lang LaSalle
+186,www.lear.com,200,False,"",,False,"v=DMARC1; p=none; rua=mailto:dmarc_rua@emaildefense.proofpoint.com,mailto:dmarc_rua@lear.com; ruf=mailto:dmarc_ruf@emaildefense.proofpoint.com; fo=1",True,none,100,r,r,none,186,Lear
+187,www.lincolnfinancial.com,200,False,"",,False,,False,,,,,,187,Lincoln National
+188,www.schwab.com,200,True,"",,False,v=DMARC1; p=reject; rua=mailto:dmarc_rua@emaildefense.proofpoint.com; ruf=mailto:dmarc_ruf@emaildefense.proofpoint.com;fo=1,True,reject,100,r,r,reject,188,Charles Schwab
+189,www.rossstores.com,200,False,"",,False,,False,,,,,,189,Ross Stores
+190,www.mastercard.us,200,False,"",,False,v=DMARC1;p=none;fo=1;rua=mailto:dmarc_rua@emaildefense.proofpoint.com;ruf=mailto:dmarc_ruf@emaildefense.proofpoint.com,True,none,100,r,r,none,190,Mastercard
+191,www.genpt.com,200,False,"",,False,v=DMARC1; p=none; pct=100; rua=mailto:_demarc@genpt.com; ruf=mailto:_demarc@genpt.com; fo=1; adkim=r; aspf=r; rf=afrf; ri=3600; sp=none,True,none,100,r,r,none,191,Genuine Parts
+192,www.westrock.com,200,False,"",,False,v=DMARC1; p=none; fo=1; rua=mailto:dmarc_rua@emaildefense.proofpoint.com; ruf=mailto:dmarc_ruf@emaildefense.proofpoint.com,True,none,100,r,r,none,192,WestRock
+193,www.eogresources.com,200,True,"",,False,v=DMARC1; p=quarantine; rua=mailto:dmarcreports@eogresources.com,True,quarantine,100,r,r,quarantine,193,EOG Resources
+194,www.cognizant.com,200,False,"",,False,,False,,,,,,194,goanizant Technology
+195,www.modernatx.com,200,False,"",,False,v=DMARC1; p=none; rua=mailto:271752973d4b367@rep.dmarcanalyzer.com; ruf=mailto:271752973d4b367@for.dmarcanalyzer.com; fo=1;,True,none,100,r,r,none,195,Moderna
+197,www.hfsinclair.com,200,False,"",,False,,False,,,,,,197,HF Sinclair
+198,www.ti.com,200,False,"",,False,v=DMARC1;p=quarantine;sp=none;rua=mailto:dmarc-aggr@ti.com;ruf=mailto:dmarc-for@ti.com;fo=0,True,quarantine,100,r,r,none,198,Texas Instruments
+199,www.emerson.com,200,False,"",,False,v=DMARC1; p=none; fo=1; rua=mailto:dmarc_rua@emaildefense.proofpoint.com; ruf=mailto:dmarc_ruf@emaildefense.proofpoint.com,True,none,100,r,r,none,199,Emerson Electric
+200,www.wesco.com,200,False,"",,False,,False,,,,,,200,WESCO International
+201,www.generalmills.com,200,False,"",,False,v=DMARC1; p=reject; rua=mailto:jsbnzmkx@ag.dmarcian.com; ruf=mailto:jsbnzmkx@fr.dmarcian.com,True,reject,100,r,r,reject,201,General Mills
+202,www.tenneco.com,200,False,"",,False,v=DMARC1; p=none; rua=mailto:Global-IT-Communications@tenneco.com; ruf=mailto:Global-IT-Communications@tenneco.com; fo=1;,True,none,100,r,r,none,202,Tenneco
+203,gwcnweb.org,200,False,"aspmx.l.google.com, alt1.aspmx.l.google.com, alt2.aspmx.l.google.com, alt3.aspmx.l.google.com, alt4.aspmx.l.google.com",v=spf1 +a +mx +ip4:50.87.144.87 ~all,True,,False,,,,,,203,Waste Management
+204,www.viatris.com,200,False,mxa-0054f601.gslb.pphosted.com,v=spf1 +mx ip4:54.240.30.240 ip4:54.240.30.241 ip4:69.169.227.219 ip4:205.220.189.169 ip4:205.220.188.142 ip4:205.220.189.159 include:spf-0054f601.pphosted.com include:ae.veevasystems.com include:spf.protection.outlook.com include:_spf.salesforce.com -all,True,"v=DMARC1; p=none; pct=100; rua=mailto:rua.dmarc@viatris.com; ruf=mailto:ruf.dmarc@viatris.com,mailto:dmarc_ruf@emaildefense.proofpoint.com; fo=1",True,none,100,r,r,none,204,Viatris
+205,www.dish.com,200,False,"",,False,,False,,,,,,205,DISH Network
+206,www.l3harris.com,200,False,"",,False,v=DMARC1;p=quarantine;sp=none;rua=mailto:66643f5e@mxtoolbox.dmarc-report.com;ruf=mailto:66643f5e@forensics.dmarc-report.com;,True,quarantine,100,r,r,none,206,L3Harris Technologies
+207,dxc.com,200,False,"",v=spf1 include:spf.protection.outlook.com include:spf.messagelabs.com a:mgw.dxc.com include:mktomail.com ip4:147.29.236.1 ip4:147.29.238.1 ip4:151.193.220.17 ip4:151.193.220.19 include:sendgrid.net ip4:74.116.10.54 ip4:74.116.10.66 ip4:74.116.14.30 ip4:70.184.28.103 ip4:50.31.36.179 ip4:192.85.154.64/26 ip4:199.228.142.64/26 a:c.spf.service-now.com ip4:205.220.177.155 ip4:205.220.165.155 ip4:185.99.205.233 ip4:185.99.205.234 ip4:185.99.205.236 ip4:185.99.205.237 ip4:212.83.215.11 ip4:212.83.232.197 ip4:138.35.24.128/26 ip4:138.35.86.192/27 ip4:138.35.224.64/26 ip4:168.87.137.96/27 ip4:168.87.75.64/26 ip4:168.87.2.128/26 ip4:208.75.120.0/22 ~all,True,v=DMARC1; p=none; sp=reject; rua=mailto:83d29ee7edc7.a@dmarcinput.com; ruf=mailto:83d29ee7edc7.f@dmarcinput.com; fo=1,True,none,100,r,r,reject,207,DXC Technology
+208,www.block.xyz,200,False,"",,False,v=DMARC1;p=reject;pct=100;rua=mailto:postmasters@squareup.com,True,reject,100,r,r,reject,208,Block
+209,www.goodyear.com,200,False,"",,False,v=DMARC1; p=none; rua=mailto:dmarca@goodyear.com; ruf=mailto:dmarcf@goodyear.com; fo=1,True,none,100,r,r,none,209,Goodyear Tire & Rubber
+210,www.uber.com,200,False,mx.sendgrid.net,,False,v=DMARC1; p=quarantine; rua=mailto:dmarc_agg@vali.email,True,quarantine,100,r,r,quarantine,210,Uber Technologies
+211,www.colgatepalmolive.com,200,False,"",,False,v=DMARC1; p=reject; fo=1; ri=3600; rua=mailto:dmarc_rua@emaildefense.proofpoint.com; ruf=mailto:dmarc_ruf@emaildefense.proofpoint.com,True,reject,100,r,r,reject,211,Colgate-Palmolive
+212,www.stanleyblackanddecker.com,200,False,"",,False,,False,,,,,,212,Stanley Black & Decker
+213,www.dupont.com,200,False,"",,False,v=DMARC1; p=none; fo=1; rua=mailto:dmarc_rua@emaildefense.proofpoint.com; ruf=mailto:dmarc_ruf@emaildefense.proofpoint.com,True,none,100,r,r,none,213,DuPont
+214,www.stryker.com,200,False,"",,False,v=DMARC1; p=quarantine; pct=100; rua=mailto:spam.dumpster@stryker.com; ruf=mailto:spam.dumpster@stryker.com,True,quarantine,100,r,r,quarantine,214,Stryker
+215,www.nexteraenergy.com,200,False,"",,False,v=DMARC1; p=none; fo=1; rua=mailto:dmarc_rua@emaildefense.proofpoint.com; ruf=mailto:dmarc_ruf@emaildefense.proofpoint.com,True,none,100,r,r,none,215,NextEra Energy
+216,www.targaresources.com,200,False,"",,False,v=DMARC1;p=none;pct=100;rua=mailto:DMARC@targaresources.com;ruf=mailto:DMARC@targaresources.com;aspf=r;adkim=r;fo=0,True,none,100,r,r,none,216,Targa Resources
+217,www.westerndigital.com,200,False,"",,False,"v=DMARC1; p=quarantine; pct=100;rua=mailto:8xkq3jdr@ag.dmarcian.com,mailto:westdig-dmarc-rua@westerndigital.com; ruf=mailto:westdig-dmarc-ruf@westerndigital.com; rf=afrf; ri=7200",True,quarantine,100,r,r,quarantine,217,Western Digital
+218,www.ppg.com,200,False,"",,False,v=DMARC1; p=none; fo=1; rua=mailto:dmarc_rua@emaildefense.proofpoint.com; ruf=mailto:dmarc_ruf@emaildefense.proofpoint.com,True,none,100,r,r,none,218,PPG Industries
+219,www.aep.com,200,False,"",,False,,False,,,,,,219,American Electric Power
+220,www.gap.com,200,False,"",,False,"v=DMARC1; p=reject; fo=1; rua=mailto:hojfhixb@ag.dmarcian.com,mailto:dmarc_agg@auth.returnpath.net,mailto:dmarc_agg@vali.email; ruf=mailto:hojfhixb@fr.dmarcian.com,mailto:dmarc_afrf@auth.returnpath.net;",True,reject,100,r,r,reject,220,Gap
+222,www.rgare.com,200,False,"",,False,v=DMARC1; p=none; fo=1; rua=mailto:dmarc_rua@emaildefense.proofpoint.com; ruf=mailto:dmarc_ruf@emaildefense.proofpoint.com,True,none,100,r,r,none,222,Reinsurance Group of
+223,www.kindermorgan.com,200,False,"",,False,,False,,,,,,223,Kinder Morgan
+224,www.oneok.com,200,False,"",,False,"v=DMARC1; p=none; fo=1; rua=mailto:dmarc_rua@emaildefense.proofpoint.com,mailto:informationsecurity@oneok.com; ruf=mailto:dmarc_ruf@emaildefense.proofpoint.com,mailto:informationsecurity@oneok.com",True,none,100,r,r,none,224,Oneok
+225,www.expeditors.com,200,False,"",,False,v=DMARC1;p=none;pct=100;aspf=r;adkim=r;rua=mailto:xr0tyuvn@expeditors.com,True,none,100,r,r,none,225,Expeditors Intl. of Washington
+226,www.amd.com,200,False,"",,False,v=DMARC1; p=quarantine; rua=mailto:dmarc_agg@vali.email,True,quarantine,100,r,r,quarantine,226,Advanced Micro Devices
+227,www.fiserv.com,200,False,"",,False,"v=DMARC1; p=reject; fo=0; rua=mailto:first-data@rua.agari.com, mailto:dmarc_rua@emaildefense.proofpoint.com; ruf=mailto:first-data@ruf.agari.com, mailto:dmarc_ruf@emaildefense.proofpoint.com",True,reject,100,r,r,reject,227,Fiserv
+228,www.elcompanies.com,200,False,"",,False,v=DMARC1;p=reject;fo=1;rua=mailto:dmarc_rua@emaildefense.proofpoint.com;ruf=mailto:dmarc_ruf@emaildefense.proofpoint.com,True,reject,100,r,r,reject,228,Estée Lauder
+229,www.bnymellon.com,200,False,"",,False,v=DMARC1; p=reject; fo=1; ri=3600; rua=mailto:bny-mellon@rua.agari.com; ruf=mailto:bny-mellon@ruf.agari.com,True,reject,100,r,r,reject,229,Bank of New York Mellon
+230,www.labcorp.com,200,False,"",,False,v=DMARC1; p=reject; rua=mailto:dmarc_rua@emaildefense.proofpoint.com; ruf=mailto:dmarc_ruf@emaildefense.proofpoint.com,True,reject,100,r,r,reject,230,Laboratory Corp. of America
+231,www.regeneron.com,200,False,"",,False,v=DMARC1; p=reject; fo=1; rua=mailto:dmarc_rua@emaildefense.proofpoint.com; ruf=mailto:dmarc_ruf@emaildefense.proofpoint.com,True,reject,100,r,r,reject,231,Regeneron Pharmaceuticals
+232,www.landolakesinc.com,200,False,"",,False,"v=DMARC1; p=none; fo=1; ri=3600; rua=mailto:ydmxkuah@ag.dmarcian.com,mailto:ExchangeSMTPReporting@landolakes.com; ruf=mailto:ydmxkuah@fr.dmarcian.com,mailto:ExchangeSMTPReporting@landolakes.com",True,none,100,r,r,none,232,Land O'Lakes
+233,www.cheniere.com,200,False,"mxa-001ae001.gslb.pphosted.com, mxb-001ae001.gslb.pphosted.com",v=spf1 ip4:64.125.105.111/32 ip4:64.125.105.113/32 ip4:170.75.245.48/32 include:spf-001ae001.pphosted.com include:spf.protection.outlook.com ~all,True,,False,,,,,,233,Cheniere Energy
+234,www.southwest.com,200,False,"",,False,v=DMARC1; p=reject; rua=mailto:dmarc_rua@emaildefense.proofpoint.com; ruf=mailto:dmarc_ruf@emaildefense.proofpoint.com;fo=1,True,reject,100,r,r,reject,234,Southwest Airlines
+235,www.adobe.com,200,False,"",,False,v=DMARC1; p=reject; sp=reject; pct=100; rua=mailto:adobe@rua.agari.com; ruf=mailto:adobe@ruf.agari.com; fo=1,True,reject,100,r,r,reject,235,Adobe
+236,www.synchrony.com,200,True,"",,False,v=DMARC1; p=reject; rua=mailto:dmarc_rua@emaildefense.proofpoint.com; ruf=mailto:dmarc_ruf@emaildefense.proofpoint.com; fo=1; ri=3600,True,reject,100,r,r,reject,236,Synchrony Financial
+237,www.corteva.com,200,False,"",,False,"v=DMARC1; p=reject; sp=reject; fo=1; ri=86400; rua=mailto:dmarc_rua@emaildefense.proofpoint.com,mailto:dmarc_support@corteva.com; ruf=mailto:dmarc_ruf@emaildefense.proofpoint.com,mailto:dmarc_support@corteva.com",True,reject,100,r,r,reject,237,Corteva
+238,fnf.com,200,False,"",,False,,False,,,,,,238,Fidelity National Financial
+239,www.newlook.dteenergy.com,200,False,"",,False,,False,,,,,,239,DTEEnergy
+241,www.halliburton.com,200,False,"",,False,"v=DMARC1; p=reject; fo=1; rua=mailto:fwojgd6z@ag.dmarcian.com; ruf=mailto:dmarcforensics@halliburton.com, mailto:fwojgd6z@fr.dmarcian.com;",True,reject,100,r,r,reject,241,Halliburton
+242,www.adp.com,200,False,"",,False,v=DMARC1; p=reject; fo=1; rua=mailto:dmarc_rua@emaildefense.proofpoint.com; ruf=mailto:dmarc_ruf@emaildefense.proofpoint.com,True,reject,100,r,r,reject,242,Automatic Data Processing
+243,www.edison.com,200,False,"",,False,,False,,,,,,243,Edison International
+244,www.borgwarner.com,200,False,"",,False,,False,,,,,,244,BorgWarner
+245,www.nordstrom.com,200,False,"",,False,v=DMARC1; p=reject; fo=1; ri=3600; rua=mailto:nordstrom@rua.agari.com; ruf=mailto:nordstrom@ruf.agari.com,True,reject,100,r,r,reject,245,Nordstrom
+246,loews.com,200,False,"mxa-001d4001.gslb.pphosted.com, mxb-001d4001.gslb.pphosted.com",v=spf1 ip4:208.65.57.147 ip4:208.65.57.148 ip4:34.195.23.81 ip4:34.195.175.114 include:spf-001d4001.pphosted.com ~all,True,v=DMARC1; p=reject; fo=1; rua=mailto:e5b02ddb@mxtoolbox.dmarc-report.com; ruf=mailto:e5b02ddb@forensics.dmarc-report.com,True,reject,100,r,r,reject,246,Loews
+247,www.guardianlife.com,200,False,"",,False,v=DMARC1;p=quarantine; pct=100; rua=mailto:DMARC@glic.com; ruf=mailto:DMARC_RUF@glic.com,True,quarantine,100,r,r,quarantine,247,Guardian Life Ins. Co. of America
+248,www.pxd.com,200,False,"",,False,v=DMARC1; p=quarantine; rua=mailto:e8749581009e309@rep.dmarcanalyzer.com; ruf=mailto:e8749581009e309@for.dmarcanalyzer.com; pct=100; sp=reject; fo=1;,True,quarantine,100,r,r,reject,248,Pioneer Natural Resources
+249,www.autozone.com,200,False,"",,False,,False,,,,,,249,AutoZone
+250,www.lamresearch.com,200,False,"",,False,v=DMARC1; p=reject; fo=1; rua=mailto:dmarc.rua@lamresearch.com; ruf=mailto:dmarc.ruf@lamresearch.com,True,reject,100,r,r,reject,250,Lam Research
+252,www.itw.com,200,False,"",,False,v=DMARC1; p=none; pct=100; ri=3600; rua=mailto:dmarc_agg@vali.email,True,none,100,r,r,none,252,Illinois Tool Works
+253,www.parker.com,200,False,"",,False,v=DMARC1;p=reject;sp=quarantine;rua=mailto:DMARC-Reports-Aggregate@parker.com;ruf=mailto:DMARC-Reports-Forensic@parker.com;fo=1;aspf=r;,True,reject,100,r,r,quarantine,253,Parker-Hannifin
+254,www.otis.com,200,False,"",v=spf1 -all,True,v=DMARC1; p=reject; fo=1; rua=mailto:dmarc_rua@emaildefense.proofpoint.com; ruf=mailto:dmarc_ruf@emaildefense.proofpoint.com,True,reject,100,r,r,reject,254,Otis Worldwide
+255,www.omnicomgroup.com,200,False,"",,False,v=DMARC1; p=reject; rua=mailto:1e9b317813bb873@rep.dmarcanalyzer.com; ruf=mailto:1e9b317813bb873@for.dmarcanalyzer.com; fo=1;,True,reject,100,r,r,reject,255,Omnicom Group
+256,www.principal.com,200,False,"mxa-002f7901.gslb.pphosted.com, mxb-002f7901.gslb.pphosted.com",v=spf1 mx include:spf.principal.com -all,True,v=DMARC1;p=reject;sp=none;pct=100;fo=1;ri=86400;rua=mailto:dmarc_rua@emaildefense.proofpoint.com;ruf=mailto:dmarc_ruf@emaildefense.proofpoint.com,True,reject,100,r,r,none,256,Principal Financial
+257,www.dominionenergy.com,200,False,"",,False,v=DMARC1; p=none; rua=mailto:dmarc_rua@emaildefense.proofpoint.com; ruf=mailto:dmarc_ruf@emaildefense.proofpoint.com; fo=1,True,none,100,r,r,none,257,Dominion Energy
+258,www.kelloggs.com,200,True,"",,False,v=DMARC1; p=reject; rua=mailto:dmarc_rua@emaildefense.proofpoint.com; ruf=mailto:dmarc_ruf@emaildefense.proofpoint.com; fo=1,True,reject,100,r,r,reject,258,Kellogg
+259,www.fluor.com,200,False,"",,False,v=DMARC1; p=none; pct=100; ruf=mailto:rufrua@fluor.com; rua=mailto:rufrua@fluor.com;,True,none,100,r,r,none,259,Fluor
+260,aecom.com,200,False,"mxa-00219703.gslb.pphosted.com, mxb-00219703.gslb.pphosted.com",v=spf1 include:%{ir}.%{v}.%{d}.spf.has.pphosted.com -all,False,v=DMARC1; p=reject; fo=1; rua=mailto:dmarc_rua@emaildefense.proofpoint.com; ruf=mailto:dmarc_ruf@emaildefense.proofpoint.com,True,reject,100,r,r,reject,260,AECOM
+261,www.rsac.com,200,False,"",,False,v=DMARC1; p=none; sp=none; rua=mailto:re+cd694a810b49@inbound.dmarcdigests.com,True,none,100,r,r,none,261,Reliance Steel & Aluminum
+262,www.jacobs.com,200,False,"",,False,v=DMARC1; p=quarantine; rua=mailto:dmarc_rua@emaildefense.proofpoint.com; ruf=mailto:dmarc_ruf@emaildefense.proofpoint.com;fo=1,True,quarantine,100,r,r,quarantine,262,Jacobs Engineering Group
+263,www.corning.com,200,False,"",,False,,False,,,,,,263,Corning
+265,www.qurateretailgroup.com,200,False,"",,False,v=DMARC1; p=none; fo=1; ri=3600; rua=mailto:qurate@rua.dmp.cisco.com; ruf=mailto:qurate@ruf.dmp.cisco.com,True,none,100,r,r,none,265,Qurate Retail
+266,www.pacificlife.com,200,False,"",,False,"v=DMARC1; p=reject; rua=mailto:dmarc_agg@vali.email,mailto:postmaster@pacificlife.com; ruf=mailto:postmaster@pacificlife.com; fo=1; ri=3600",True,reject,100,r,r,reject,266,Pacific Life
+267,www.pultegroupinc.com,200,False,"pultegroup.com.s9a1.psmtp.com, pultegroup.com.s9a2.psmtp.com, pultegroup.com.s9b1.psmtp.com, pultegroup.com.s9b2.psmtp.com",v=spf1 -all,True,v=DMARC1;p=reject;sp=reject;fo=1;rua=mailto:dmarc_rua@emaildefense.proofpoint.com;ruf=mailto:dmarc_ruf@emaildefense.proofpoint.com,True,reject,100,r,r,reject,267,PulteGroup
+268,www.fisglobal.com,200,True,"",,False,v=DMARC1; p=reject; rua=mailto:2ynhg3yt@ag.dmarcian.com,True,reject,100,r,r,reject,268,"Fidelity National Information
+Services"
+269,www.iqvia.com,200,False,"",,False,"v=DMARC1; p=none; rua=mailto:dmarc_agg@vali.email,mailto:5a4340b5@mxtoolbox.dmarc-report.com,mailto:cf86883e@inbox.ondmarc.com,mailto:dmarc_aggregate_reports@iqvia.com,mailto:dmarc_rua@emaildefense.proofpoint.com,mailto:d@rua.agari.com; ruf=mailto:5a4340b5@forensics.dmarc-report.com,mailto:cf86883e@inbox.ondmarc.com,mailto:dmarc_forensic_reports@iqvia.com,mailto:dmarc_ruf@emaildefense.proofpoint.com,mailto:d@ruf.agari.com; fo=1",True,none,100,r,r,none,269,1QVIA Holdings
+270,www.marriott.com,200,False,"",,False,v=DMARC1; p=reject; pct=100; sp=reject; rua=mailto:ts2wfbhi@ag.dmarcian.com; ruf=mailto:ts2wfbhi@fr.dmarcian.com;,True,reject,100,r,r,reject,270,Marriott International
+271,www.berryglobal.com,200,False,"",,False,v=DMARC1; p=none; fo=1; rua=mailto:DMarcForensicsBerryGlobal-com@berryglobal.com; ruf=mailto:DMarcForensicsBerryGlobal-com@berryglobal.com,True,none,100,r,r,none,271,Berry Global Group
+272,www.ball.com,200,False,"",,False,v=DMARC1;p=none;rua=mailto:dmarc_rua@emaildefense.proofpoint.com;ruf=mailto:dmarc_ruf@emaildefense.proofpoint.com;fo=1,True,none,100,r,r,none,272,Ball
+273,www.group1auto.com,200,False,"",,False,v=DMARC1; p=none; rua=mailto:dmarc_rua@emaildefense.proofpoint.com; ruf=mailto:dmarc_ruf@emaildefense.proofpoint.com;fo=1,True,none,100,r,r,none,273,Group 1 Automotive
+274,www.leidos.com,200,False,"",,False,v=DMARC1; p=reject; fo=1; sp=none; pct=100; rua=mailto:dmarc_rua@leidos.com; ruf=mailto:dmarc_ruf@leidos.com,True,reject,100,r,r,none,274,Leidos Holdings
+275,www.wayfair.com,200,False,"",,False,v=DMARC1; p=quarantine; rua=mailto:dmarc@wayfair.com; fo=1; pct=100; adkim=r; aspf=r,True,quarantine,100,r,r,quarantine,275,Wayfair
+276,www.coned.com,200,False,"",,False,v=DMARC1;p=none;rua=mailto:dmarc-reports@coned.com;fo=1;pct=100;rf=afrf,True,none,100,r,r,none,276,Consolidated Edison
+277,www.ameriprise.com,200,False,"",,False,v=DMARC1; p=reject; sp=none; fo=1; rua=mailto:dmarc_rua@emaildefense.proofpoint.com; ruf=mailto:dmarc_ruf@emaildefense.proofpoint.com,True,reject,100,r,r,none,277,Ameriprise Financial
+278,my.xcelenergy.com,200,False,"",,False,,False,,,,,,278,Xcel Energy
+279,www.oreillyauto.com,200,False,"",,False,,False,,,,,,279,O'Reilly Automotive
+280,www.globalp.com,200,False,"",,False,v=DMARC1;p=none;sp=none;pct=100;adkim=r;aspf=r;rua=mailto:tflanagan@globalp.com;ruf=mailto:tflanagan@globalp.com;ri=86400;fo=1,True,none,100,r,r,none,280,Global Partners
+281,www.discover.com,200,True,"",,False,v=DMARC1; p=none; fo=1;rua=mailto:dmarc_rua@discover.com; ruf=mailto:dmarc_ruf@discover.com; ruf=mailto:dmarc_reports@discover.com,True,none,100,r,r,none,281,Discover Financial Services
+282,www.rocketcompanies.com,200,False,"",,False,v=DMARC1; p=none; fo=1; ri=3600; rua=mailto:quicken-loans@rua.dmp.cisco.com; ruf=mailto:quicken-loans@ruf.dmp.cisco.com,True,none,100,r,r,none,282,Rocket Companies
+283,www.lkqcorp.com,200,False,"",,False,v=DMARC1; p=none; fo=1; rua=mailto:dmarc_rua@emaildefense.proofpoint.com; ruf=mailto:dmarc_ruf@emaildefense.proofpoint.com,True,none,100,r,r,none,283,LKQ
+284,www.grainger.com,200,False,"",,False,,False,,,,,,284,W.W. Grainger
+285,www.quantaservices.com,200,False,quantaservices-com.mail.protection.outlook.com,v=spf1 include:_u.quantaservices.com._spf.smart.ondmarc.com -all,True,v=DMARC1; p=none; pct=100; sp=none; rua=mailto:6e1a24f3@inbox.us.redsift.cloud; ruf=mailto:6e1a24f3@inbox.us.redsift.cloud; adkim=r; aspf=r; fo=0; rf=afrf; ri=3600,True,none,100,r,r,none,285,Quanta Services
+286,www.crowncork.com,200,False,"",,False,v=DMARC1; p=reject; fo=1;rua=mailto:dmarc_rua@emaildefense.proofpoint.com; ruf=mailto:dmarc_ruf@emaildefense.proofpoint.com,True,reject,100,r,r,reject,286,CrownHoldings
+287,www.foxnews.com,200,True,"",,False,v=DMARC1; p=reject; fo=1; rua=mailto:dmarc_rua@emaildefense.proofpoint.com; ruf=mailto:dmarc_ruf@emaildefense.proofpoint.com,True,reject,100,r,r,reject,287,Fox
+288,www.sempra.com,200,False,"",,False,"v=DMARC1; p=none; fo=1; ri=3600; rua=mailto:dmarc_rua@emaildefense.proofpoint.com,mailto:dmarcrua@sempra.com; ruf=mailto:dmarc_ruf@emaildefense.proofpoint.com,mailto:dmarcruf@sempra.com",True,none,100,r,r,none,288,Sempra
+289,www.markel.com,200,False,"",,False,v=DMARC1; p=none; rua=mailto:6vlzrhmt@ag.dmarcian.com;,True,none,100,r,r,none,289,Markel
+291,www.xpo.com,200,False,"mxa-002b6701.gslb.pphosted.com, mxb-002b6701.gslb.pphosted.com",,False,"v=DMARC1; p=none; fo=1; rua=mailto:xpo@rua.agari.com,mailto:dmarcreports@xpo.com,mailto:dmarc_rua@emaildefense.proofpoint.com; ruf=mailto:xpo@ruf.agari.com,mailto:dmarcreports@xpo.com,mailto:dmarc_ruf@emaildefense.proofpoint.com",True,none,100,r,r,none,291,XPO Logistics
+292,www.baxter.com,200,False,"",,False,v=DMARC1; p=reject; fo=1; ri=3600; rua=mailto:baxter-international@rua.agari.com; ruf=mailto:baxter-international@ruf.agari.com,True,reject,100,r,r,reject,292,Baxter International
+293,www.ecolab.com,200,False,"",,False,v=DMARC1; p=reject; fo=1; rua=mailto:dmarc_rua@emaildefense.proofpoint.com; ruf=mailto:dmarc_ruf@emaildefense.proofpoint.com,True,reject,100,r,r,reject,293,Ecolab
+294,www.tractorsupply.com,200,False,"",,False,v=DMARC1; p=reject; fo=1; rua=mailto:dmarc_rua@emaildefense.proofpoint.com; ruf=mailto:dmarc_ruf@emaildefense.proofpoint.com,True,reject,100,r,r,reject,294,Tractor Supply
+295,www.andersonsinc.com,200,False,"",,False,v=DMARC1; p=quarantine; rua=mailto:dmarc_agg@vali.email; sp=none,True,quarantine,100,r,r,none,295,The Andersons
+296,www.keurigdrpepper.com,200,False,"",,False,v=DMARC1; p=reject; fo=1; rua=mailto:dmarc_rua@emaildefense.proofpoint.com; ruf=mailto:dmarc_ruf@emaildefense.proofpoint.com,True,reject,100,r,r,reject,296,Keurig Dr Pepper
+297,uhs.com,200,False,"",v=spf1 -all,True,v=DMARC1; p=reject; rua=mailto:dmarc_rua@emaildefense.proofpoint.com; ruf=mailto:dmarc_ruf@emaildefense.proofpoint.com;fo=1,True,reject,100,r,r,reject,297,Universal Health Services
+298,www.csx.com,200,False,"",,False,v=DMARC1; p=none; fo=1; rua=mailto:dmarc_rua@emaildefense.proofpoint.com; ruf=mailto:dmarc_ruf@emaildefense.proofpoint.com,True,none,100,r,r,none,298,CSX
+299,www.henryschein.com,200,False,"",,False,v=DMARC1; p=none; fo=1; rua=mailto:dmarc_rua@emaildefense.proofpoint.com; ruf=mailto:dmarc_ruf@emaildefense.proofpoint.com,True,none,100,r,r,none,299,Henry Schein
+300,www.sonicautomotive.com,200,False,"",,False,,False,,,,,,300,Sonic Automotive
+301,www.ebay.com,200,False,"",,False,"v=DMARC1; p=reject; rua=mailto:ebay@rua.agari.com,mailto:dmarc_agg@auth.returnpath.net; ruf=mailto:ebay@ruf.agari.com,mailto:dmarc_afrf@auth.returnpath.net; fo=1; rf=afrf; pct=100",True,reject,100,r,r,reject,301,eBay
+302,www.textron.com,200,False,"",,False,"v=DMARC1; p=reject; pct=100; fo=1; ri=3600; rua=mailto:16e09a11@inbox.ondmarc.com,mailto:Abuse@textron.com; ruf=mailto:16e09a11@inbox.ondmarc.com;",True,reject,100,r,r,reject,302,Textron
+303,www.edwardjones.com,200,False,"",,False,,False,,,,,,303,Jones Financial (Edward Jones)
+304,www.chs.net,200,False,"",,False,,False,,,,,,304,Community Health Systems
+305,www.mosaicco.com,200,False,"",,False,v=DMARC1; p=quarantine; rua=mailto:domain.register@mosaicco.com; ruf=mailto:domain.register@mosaicco.com; pct=20;,True,quarantine,20,r,r,quarantine,305,Mosaic
+306,www.thorindustries.com,200,True,"",,False,,False,,,,,,306,Thor Industries
+308,newmont.com,200,False,"mxa-00503201.gslb.pphosted.com, mxb-00503201.gslb.pphosted.com",v=spf1 include:%{ir}.%{v}.%{d}.spf.has.pphosted.com ip4:184.150.239.212/32 ip4:50.100.23.199/32 ip4:50.100.15.197/32 include:spf.protection.outlook.com include:spf-00503201.pphosted.com ~all,False,v=DMARC1; p=reject; fo=1; rua=mailto:dmarc_rua@emaildefense.proofpoint.com; ruf=mailto:dmarc_ruf@emaildefense.proofpoint.com,True,reject,100,r,r,reject,308,Newmont
+309,www.devonenergy.com,200,False,"",,False,,False,,,,,,309,Devon Energy
+310,wbd.com,200,False,"mx0a-00241e02.pphosted.com, mx0b-00241e02.pphosted.com, aspmx.l.google.com, alt1.aspmx.l.google.com, alt2.aspmx.l.google.com, alt3.aspmx.l.google.com, alt4.aspmx.l.google.com",v=spf1 include:spf.protection.outlook.com include:_spf.google.com ip4:198.147.8.23 ip4:198.147.9.14 ip4:205.220.160.51 ip4:205.220.172.51 include:mailgun.org include:cust-spf.exacttarget.com ~all,True,v=DMARC1; p=none; fo=1; ri=3600; rua=mailto:discovery@rua.agari.com; ruf=mailto:discovery@ruf.agari.com,True,none,100,r,r,none,310,Warner Bros. Discovery
+311,www.jbhunt.com,200,False,"",,False,v=DMARC1; p=none; fo=1; rua=mailto:dmarc_rua@emaildefense.proofpoint.com;ruf=mailto:dmarc_ruf@emaildefense.proofpoint.com,True,none,100,r,r,none,311,J.B. Hunt Transport Services
+312,www.alcoa.com,200,False,"",,False,,False,,,,,,312,Alcoa
+313,www.kiewit.com,200,False,"mxa-002c7c01.gslb.pphosted.com, mxb-002c7c01.gslb.pphosted.com",v=spf1 ip4:166.78.90.5 ip4:65.221.12.148 ip4:65.221.12.128 ip4:192.174.72.0/21 ip6:2620:1fc::/36 ip4:52.38.36.189 ip4:216.162.32.70 ip4:216.162.32.71 include:emailsrvr.com include:spf.protection.outlook.com include:spf-002c7c01.pphosted.com  include:_spf.concurcompleat.com a:b.spf.service-now.com a:c.spf.service-now.com ~all,True,v=DMARC1; p=reject; fo=1; rua=mailto:dmarc_rua@emaildefense.proofpoint.com; ruf=mailto:dmarc_ruf@emaildefense.proofpoint.com,True,reject,100,r,r,reject,313,Peter Kiewit Sons’
+314,www.aramark.com,200,False,"",,False,v=DMARC1; p=reject; fo=1; ri=3600; rua=mailto:aramark@rua.agari.com; ruf=mailto:aramark@ruf.agari.com,True,reject,100,r,r,reject,314,Aramark
+315,www.vistra.com,200,False,"",,False,v=DMARC1;p=none;rua=mailto:ecefb2236e@rua.easydmarc.com;ruf=mailto:ecefb2236e@ruf.easydmarc.com;fo=1,True,none,100,r,r,none,315,Vistra
+316,www.statestreet.com,200,False,"",,False,v=DMARC1; p=none; rua=mailto:dmarc_agg@emailfraudprotect.email,True,none,100,r,r,none,316,State Street
+317,www.unum.com,200,False,"mxa-004bf101.gslb.pphosted.com, mxb-004bf101.gslb.pphosted.com",v=spf1 include:spf-004bf101.pphosted.com include:%{d}.42.spf-protect.agari.com exists:%{i}._i.%{d}._d.espf.agari.com ~all,False,"v=DMARC1; p=reject; fo=1; ri=3600; rua=mailto:unum@rua.agari.com,mailto:rua_reports@unum.com; ruf=mailto:unum@ruf.agari.com,mailto:ruf_reports@unum.com",True,reject,100,r,r,reject,317,Unum Group
+318,www.alleghany.com,200,False,"",,False,,False,,,,,,318,Alleghany
+319,www.bostonscientific.com,200,False,"",,False,,False,,,,,,319,Boston Scientific
+320,www.westlake.com,200,False,"mxa-0018f101.gslb.pphosted.com, mxb-0018f101.gslb.pphosted.com",v=spf1 include:spf1.westlake.com include:spf2.westlake.com ~all,True,v=DMARC1; p=none; rua=mailto:dmarc_rua@emaildefense.proofpoint.com; ruf=mailto:dmarc_ruf@emaildefense.proofpoint.com; fo=1,True,none,100,r,r,none,320,Westlake
+321,www.entergy.com,200,False,"",,False,v=DMARC1; p=reject;,True,reject,100,r,r,reject,321,Entergy
+322,www.iff.com,200,False,"",,False,v=DMARC1; p=none; pct=100; rua=mailto:dmarc_rua@emaildefense.proofpoint.com; ruf=mailto:dmarc_ruf@emaildefense.proofpoint.comv,True,none,100,r,r,none,322,International Flavors & Fragrances
+323,www.davita.com,200,False,"",,False,v=DMARC1; p=none; rua=mailto:dmarc_reports@davita.com; ruf=mailto:dmarc_reports@davita.com; fo=1,True,none,100,r,r,none,323,DaVita
+324,www.mutualofomaha.com,200,False,"",,False,,False,,,,,,324,Mutual of Omaha Insurance
+325,www.libertymedia.com,200,False,"",,False,v=DMARC1; p=quarantine;  pct=90; sp=none,True,quarantine,90,r,r,none,325,Assurant
+326,www.libertymedia.com,200,False,"",,False,v=DMARC1; p=quarantine;  pct=90; sp=none,True,quarantine,90,r,r,none,326,Liberty Media
+327,www.hormelfoods.com,200,False,"",,False,v=DMARC1; p=none; fo=1; rua=mailto:dmarc_rua@emaildefense.proofpoint.com; ruf=mailto:dmarc_ruf@emaildefense.proofpoint.com,True,none,100,r,r,none,327,Hormel Foods
+328,www.ielp.com,200,False,"",,False,v=DMARC1; p=quarantine; rua=mailto:dmarcreports@ielp.com; pct=100,True,quarantine,100,r,r,quarantine,328,Icahn Enterprises
+329,www.republicservices.com,203,False,"",,False,"v=DMARC1; p=reject; pct=100; sp=none; rua=mailto:ed1d6910@inbox.ondmarc.com,mailto:dmarc_rua@emaildefense.proofpoint.com; ruf=mailto:ed1d6910@inbox.ondmarc.com,mailto:dmarc_ruf@emaildefense.proofpoint.com; adkim=r; aspf=r; fo=0; rf=afrf; ri=3600",True,reject,100,r,r,none,329,Republic Services
+330,mohawkind.com,200,False,"",v=spf1 include:spf_a.mohawkind.com include:cust-spf.exacttarget.com include:spf.mandrillapp.com include:amazonses.com include:_spf.salesforce.com ip4:139.138.58.145 ip4:72.249.24.20 ip4:23.253.197.137 -all,True,v=DMARC1; p=none; rua=mailto:166e38fc2dd5563@rep.dmarcanalyzer.com; ruf=mailto:166e38fc2dd5563@for.dmarcanalyzer.com; fo=1;,True,none,100,r,r,none,330,Mohawk Industries
+331,www.conagrabrands.com,200,False,"",,False,v=DMARC1; p=reject; fo=1; rua=mailto:dmarc_rua@emaildefense.proofpoint.com; ruf=mailto:dmarc_ruf@emaildefense.proofpoint.com,True,reject,100,r,r,reject,331,Conagra Brands
+332,www.nscorp.com,200,False,"",,False,v=DMARC1;p=reject;rua=mailto:dmarc_rua@emaildefense.proofpoint.com;ruf=mailto:dmarc_ruf@emaildefense.proofpoint.com;fo=1;,True,reject,100,r,r,reject,332,Norfolk Southern
+333,www.aes.com,200,False,"",,False,"v=DMARC1; p=none; fo=1; ri=3600; rua=mailto:aes@rua.agari.com, mailto:dmarc_agg@vali.email; ruf=mailto:aes@ruf.agari.com",True,none,100,r,r,none,333,AES
+334,www.agcocorp.com,200,False,"",,False,v=DMARC1; p=none; rua=mailto:24b43873060d159@rep.dmarcanalyzer.com; ruf=mailto:24b43873060d159@for.dmarcanalyzer.com; fo=1;,True,none,100,r,r,none,334,AGCO
+335,www.caesars.com,200,False,"",,False,v=DMARC1; p=none; rua=mailto:dmarc_rua@emaildefense.proofpoint.com; ruf=mailto:dmarc_ruf@emaildefense.proofpoint.com; fo=1,True,none,100,r,r,none,335,Caesars Entertainment
+336,equitableholdings.com,200,False,"",,False,,False,,,,,,336,Equitable Holdings
+337,shop.advanceautoparts.com,200,False,"",,False,v=DMARC1; p=reject; fo=1; rua=mailto:dmarc_rua@emaildefense.proofpoint.com; ruf=mailto:dmarc_ruf@emaildefense.proofpoint.com,True,reject,100,r,r,reject,337,Advance Auto Parts
+338,www.biogen.com,200,False,"",,False,v=DMARC1; p=reject; pct=100; fo=1; rua=mailto:8abf8234@inbox.ondmarc.com; ruf=mailto:8abf8234@inbox.ondmarc.com;,True,reject,100,r,r,reject,338,Biogen
+340,www.bookingholdings.com,200,False,"",,False,v=DMARC1;p=quarantine;pct=100;rua=mailto:dmarcstats@priceline.com;ruf=mailto:dmarcmessages@priceline.com,True,quarantine,100,r,r,quarantine,340,Booking Holdings
+341,amphenol.com,200,False,amphenol-com.mail.protection.outlook.com,v=spf1 include:spf.protection.outlook.com include:spf.smtp2go.com include:_spf.q4press.com include:_spf.salesforce.com exists:%{i}._spf.mta.salesforce.com ip4:107.1.2.162 mx mx:acquiretm-com.mail.protection.outlook.com ip4:54.70.98.207 -all,True,v=DMARC1; p=reject; pct=100; rua=mailto:dkimaggrep@amphenol.com; ruf=mailto:dkimauthfail@amphenol.com; adkim=s; aspf=s,True,reject,100,s,s,reject,341,Amphenol
+342,www.questdiagnostics.com,200,False,"",v=spf1 include:spf1.questdiagnostics.com include:spf2.questdiagnostics.com ~all,False,,False,,,,,,342,Quest Diagnostics
+343,firstenergycorp.com,200,False,"mx1.hc5608-40.iphmx.com, mx2.hc5608-40.iphmx.com",v=spf1 ip4:205.132.72.0/21 include:%{ir}.%{v}.%{d}.spf.has.pphosted.com ip4:155.130.129.232/29 ip4:67.138.237.135 ~all,False,v=DMARC1;p=reject;sp=reject;pct=100;fo=1;ri=86400;rua=mailto:dmarc_rua@emaildefense.proofpoint.com;ruf=mailto:dmarc_ruf@emaildefense.proofpoint.com,True,reject,100,r,r,reject,343,FirstEnergy
+344,www.dcpmidstream.com,200,False,"",v=spf1 include:spf.protection.outlook.com -all,True,,False,,,,,,344,DCP Midstream
+345,firstenergycorp.com,200,False,"mx1.hc5608-40.iphmx.com, mx2.hc5608-40.iphmx.com",v=spf1 ip4:205.132.72.0/21 include:%{ir}.%{v}.%{d}.spf.has.pphosted.com ip4:155.130.129.232/29 ip4:67.138.237.135 ~all,False,v=DMARC1;p=reject;sp=reject;pct=100;fo=1;ri=86400;rua=mailto:dmarc_rua@emaildefense.proofpoint.com;ruf=mailto:dmarc_ruf@emaildefense.proofpoint.com,True,reject,100,r,r,reject,345,Ally Financial
+346,www.delekus.com,200,False,"mxa-00522301.gslb.pphosted.com, mxb-00522301.gslb.pphosted.com",v=spf1 include:%{ir}.%{v}.%{d}.spf.has.pphosted.com ~all,False,v=DMARC1; p=reject; fo=1; rua=mailto:dmarc_rua@emaildefense.proofpoint.com; ruf=mailto:dmarc_ruf@emaildefense.proofpoint.com,True,reject,100,r,r,reject,346,Delek US Holdings
+347,www.williamsf1.com,200,False,"",,False,,False,,,,,,347,Williams
+348,www.newellbrands.com,200,False,"",,False,,False,,,,,,348,Newell Brands
+349,www.eastman.com,200,False,"",,False,v=DMARC1; p=reject; rua=mailto:dmarc_agg@vali.email; ruf=mailto:emailreports@eastman.com; fo=1,True,reject,100,r,r,reject,349,Eastman Chemical
+350,www.airproducts.com,200,False,"",,False,,False,,,,,,350,Air Products & Chemicals
+351,www.thrivent.com,200,False,"",,False,"v=DMARC1;p=none;fo=1;rua=mailto:boxucsupport@thrivent.com,mailto:thrivent-financial@rua.agari.com;ruf=mailto:thrivent-financial@ruf.agari.com",True,none,100,r,r,none,351,Thrivent Financial for
+352,www.molsoncoors.com,200,False,"",,False,,False,,,,,,352,Molson Coors Beverage
+353,www.interpublic.com,200,False,"",,False,v=DMARC1; p=reject; fo=1; rua=mailto:dmarc_rua@emaildefense.proofpoint.com; ruf=mailto:dmarc_ruf@emaildefense.proofpoint.com,True,reject,100,r,r,reject,353,Interpublic Group
+354,www.weyerhaeuser.com,200,False,"",,False,,False,,,,,,354,Weyerhaeuser
+355,www.alticeusa.com,200,True,"",,False,v=DMARC1; p=none; fo=1; rua=mailto:dmarc_rua@emaildefense.proofpoint.com; ruf=mailto:dmarc_ruf@emaildefense.proofpoint.com,True,none,100,r,r,none,355,Altice USA
+356,www.raymondjames.com,200,True,"",,False,v=DMARC1;p=reject;fo=1;rua=mailto:dmarc_rua@emaildefense.proofpoint.com;ruf=mailto:dmarc_ruf@emaildefense.proofpoint.com,True,reject,100,r,r,reject,356,Raymond James Financial
+357,www.emcorgroup.com,200,False,"",,False,v=DMARC1;p=reject;fo=1;rua=mailto:dmarc_rua@emaildefense.proofpoint.com;ruf=mailto:dmarc_ruf@emaildefense.proofpoint.com,True,reject,100,r,r,reject,357,EMCOR Group
+358,www.eversource.com,200,False,"",,False,,False,,,,,,358,Eversource Energy
+359,ir.yumchina.com,200,False,"",,False,,False,,,,,,359,Yum China Holdings
+360,www.asburyauto.com,200,False,"",v=spf1 redirect=4d9d205q._spf._d.mim.ec,True,v=DMARC1; p=quarantine; rua=mailto:db744c1f1cf6536@rep.dmarcanalyzer.com; ruf=mailto:db744c1f1cf6536@for.dmarcanalyzer.com; pct=100; sp=none; fo=0:1:d:s;,False,,,,,,360,Asbury Automotive Group
+361,www.owens.edu,200,False,"",,False,,False,,,,,,361,Owens & Minor
+362,landing.pseg.com,200,False,"",,False,v=DMARC1; p=reject; fo=1; rua=mailto:dmarc_rua@emaildefense.proofpoint.com; ruf=mailto:dmarc_ruf@emaildefense.proofpoint.com,True,reject,100,r,r,reject,362,Public Service Enterprise Group
+363,www.unitedrentals.com,200,False,"",,False,v=DMARC1; p=reject; rua=mailto:united-rentals@rua.dmp.cisco.com; ruf=mailto:united-rentals@ruf.dmp.cisco.com,True,reject,100,r,r,reject,363,United Rentals
+364,www.mgmresorts.com,200,False,"",,False,v=DMARC1; p=quarantine; pct=100; rua=mailto:d@rua.agari.com; ruf=mailto:d@ruf.agari.com; fo=1,True,quarantine,100,r,r,quarantine,364,MGM Resorts International
+365,www.ryder.com,200,False,"",,False,"v=DMARC1; p=none; fo=1; pct=100; ri=3600; rua=mailto:dmarc_rua@emaildefense.proofpoint.com, mailto:dmarc_rua@ryder.com; ruf=mailto:dmarc_rua@emaildefense.proofpoint.com",True,none,100,r,r,none,365,Ryder System
+366,www.intuit.com,200,False,"",,False,v=DMARC1; p=reject; rua=mailto:dmarc_rua@emaildefense.proofpoint.com; ruf=mailto:dmarc_ruf@emaildefense.proofpoint.com;fo=1,True,reject,100,r,r,reject,366,Intuit
+367,www.cinfin.com,200,False,"",,False,,False,,,,,,367,Cincinnati Financial
+368,www.erieinsurance.com,200,False,"",,False,v=DMARC1; p=reject; rua=mailto:ea9a45428fe8491@rep.dmarcanalyzer.com; ruf=mailto:ea9a45428fe8491@for.dmarcanalyzer.com; fo=1;,True,reject,100,r,r,reject,368,Erie Insurance Group
+369,www.univarsolutions.com,200,False,"",,False,"v=DMARC1; p=quarantine; sp=quarantine; pct=100; rua=mailto:glzhojps@ag.dmarcian.com,mailto:dmarc_agg@vali.email; ruf=mailto:glzhojps@fr.dmarcian.com",True,quarantine,100,r,r,quarantine,369,Univar Solutions
+370,huntingtoningalls.com,200,False,"",v=spf1 -all,True,v=DMARC1; p=reject; rua=mailto:ahuqn0xa@ag.dmarcian.com; ruf=mailto:ahuqn0xa@fr.dmarcian.com; sp=reject; ri=86400,True,reject,100,r,r,reject,370,Huntington Ingalls Industries
+371,www.berkley.com,200,False,"",,False,v=DMARC1;p=reject;sp=reject;rua=mailto:3mfpzq42@ag.dmarcian.com;ruf=mailto:3mfpzq42@fr.dmarcian.com;,True,reject,100,r,r,reject,371,W.R. Berkley
+372,www.westernsouthern.com,200,False,"",,False,"v=DMARC1; p=none; rua=mailto:46gi71fy8t@rua.powerdmarc.com,mailto:dmarc_rua@westernsouthern.com,mailto:dmarc_agg@vali.email; ruf=mailto:46gi71fy8t@ruf.powerdmarc.com,mailto:dmarc_ruf@westernsouthern.com;",True,none,100,r,r,none,372,Western and Southen Financial Group
+373,www.insight.com,200,False,"",,False,,False,,,,,,373,Insight Enterprises
+374,newscorp.com,200,False,"aspmx.l.google.com, alt1.aspmx.l.google.com, alt2.aspmx.l.google.com, aspmx2.googlemail.com, aspmx3.googlemail.com",v=spf1 include:_spf.google.com include:_swn.newscorp.com include:_grc.newscorp.com include:spf1.newscorp.com include:_spf.psm.knowbe4.com ~all,True,v=DMARC1; p=reject; fo=1; rua=mailto:dmarc_rua@emaildefense.proofpoint.com; ruf=mailto:dmarc_ruf@emaildefense.proofpoint.com,True,reject,100,r,r,reject,374,News Corp.
+375,www.americantower.com,200,False,"",,False,v=DMARC1; p=none; rua=mailto:dmarc_rua@emaildefense.proofpoint.com; ruf=mailto:dmarc_ruf@emaildefense.proofpoint.com;fo=1,True,none,100,r,r,none,375,American Tower
+376,www.oldrepublic.com,200,False,"",,False,"v=DMARC1; p=quarantine; rua=mailto:dmarc_rua@emaildefense.proofpoint.com,mailto:gc-infosecurity@gwccnet.com; ruf=mailto:dmarc_ruf@emaildefense.proofpoint.com,mailto:gc-infosecurity@gwccnet.com; fo=1",True,quarantine,100,r,r,quarantine,376,Old Republic International
+377,www.burlington.com,200,False,"",,False,v=DMARC1; p=reject; fo=1; rua=mailto:dmarc_rua@emaildefense.proofpoint.com; ruf=mailto:dmarc_ruf@emaildefense.proofpoint.com,True,reject,100,r,r,reject,377,Burlington Stores
+378,avisbudgetgroup.com,200,False,"",v=spf1 exists:%{i}._i.%{d}._d.espf.dmp.cisco.com include:%{d}.5c.spf-protect.dmp.cisco.com -all,False,v=DMARC1; p=reject; fo=1; pct=100; ri=3600; rua=mailto:avis@rua.dmp.cisco.com; ruf=mailto:avis@ruf.dmp.cisco.com,True,reject,100,r,r,reject,378,Avis Budget Group
+379,www.officedepot.com,200,False,"",,False,"v=DMARC1; p=reject; rua=mailto:dmarc_agg@vali.email,mailto:oddmarc@officedepot.com",True,reject,100,r,r,reject,379,ODP
+380,vfc.com,200,False,vfc-com.mail.protection.outlook.com,v=spf1 include:spf1.vfc.com include:spf.protection.outlook.com include:nlkp.spf.avature.net include:_spf.perceptyx.com include:_spf.salesforce.com ip4:52.1.115.254 ip4:167.64.73.44 ip4:167.64.93.44 ip4:94.236.36.5 ip4:94.236.36.0 ip4:136.147.220.11 -all,True,v=DMARC1; p=none; rua=mailto:ewqfa0eu@ag.dmarcian.com; ruf=mailto:ewqfa0eu@fr.dmarcian.com; fo=1,True,none,100,r,r,none,380,VF
+381,www.bedbathandbeyond.com,200,False,"",,False,,False,,,,,,381,Bed Bath & Beyond
+382,www.seaboardcorp.com,200,True,"",,False,v=DMARC1; p=none; rua=mailto:DMARC@seaboardfoods.com;  adkim=r; aspf=r; rf= afrf; pct=100; ri= 86400;,False,,,,,,382,Seaboard
+383,www.firstam.com,200,False,"",,False,v=DMARC1; p=reject; fo=1; rua=mailto:dmarc_rua@emaildefense.proofpoint.com; ruf=mailto:dmarc_ruf@emaildefense.proofpoint.com,True,reject,100,r,r,reject,383,First American Financial
+384,www.theice.com,200,True,"",,False,v=DMARC1; p=reject; rua=mailto:dmarc-reports@ice.com; ruf=mailto:dmarc-forensics@ice.com; fo=1;,True,reject,100,r,r,reject,384,Intercontinental Exchange
+385,www.pvh.com,200,False,"",,False,v=DMARC1; p=none; rua=mailto:dmarc_agg@PVH.com; ruf=mailto:dmarc_afrf@PVH.com; fo=1;,True,none,100,r,r,none,385,PVH
+386,www.apollo.com,200,False,"",,False,"v=DMARC1; p=none; sp=none; ri=3600; rua=mailto:dmarc-rua@apollo.com,mailto:29779514b6e9665@rep.dmarcanalyzer.com; ruf=mailto:dmarc-ruf@apollo.com,mailto:29779514b6e9665@rep.dmarcanalyzer.com; fo=1;",True,none,100,r,r,none,386,Apollo Global Management
+388,www.thehersheycompany.com,200,False,"",,False,v=DMARC1; p=reject; rua=mailto:dmarc_agg@vali.email,True,reject,100,r,r,reject,388,Hershey
+389,www.nvrinc.com,200,False,"",,False,v=DMARC1; p=reject; fo=1; rua=mailto:dmarc_rua@emaildefense.proofpoint.com; ruf=mailto:dmarc_ruf@emaildefense.proofpoint.com,True,reject,100,r,r,reject,389,NVR
+390,www.footlocker.com,200,False,"",,False,v=DMARC1; p=quarantine; fo=1; rua=mailto:dmarc_rua@emaildefense.proofpoint.com; ruf=mailto:dmarc_ruf@emaildefense.proofpoint.com,True,quarantine,100,r,r,quarantine,390,Foot Locker
+391,www.dana.com,200,False,"",,False,v=DMARC1; p=reject; pct=100; rua=mailto:dmarc.reporting@dana.com; ruf=mailto:dmarc.reporting@dana.com,True,reject,100,r,r,reject,391,Dana
+392,www.spartannash.com,200,False,"",,False,v=DMARC1; p=none; fo=1; rua=mailto:17f5bb71@mxtoolbox.dmarc-report.com; ruf=mailto:17f5bb71@forensics.dmarc-report.com;,True,none,100,r,r,none,392,SpartanNash
+393,olin.com,200,False,"mxa-00676101.gslb.pphosted.com, mxb-00676101.gslb.pphosted.com",v=spf1 ip4:205.220.178.144 ip4:205.220.166.116 include:spf.protection.outlook.com include:_spf.olin.com include:_spf.salesforce.com include:_spf.mailgun.org include:sendgrid.net -all,True,v=DMARC1; p=none; rua=mailto:olinemailadmins@olin.com; ruf=mailto:infosecalerts@olin.com; fo=1,True,none,100,r,r,none,393,Olin
+394,www.chewy.com,200,False,"",,False,v=DMARC1; p=none; rua=mailto:21fb0c838604714@rep.dmarcanalyzer.com; ruf=mailto:21fb0c838604714@for.dmarcanalyzer.com; fo=1;,True,none,100,r,r,none,394,Chewy
+395,www.jackson.com,200,False,"",,False,,False,,,,,,395,Jackson Financial
+396,www.activisionblizzard.com,200,False,"",,False,,False,,,,,,396,Activision Blizzard
+397,www.tollbrothers.com,200,False,"",,False,v=DMARC1; p=reject; fo=1; rua=mailto:dmarc_rua@emaildefense.proofpoint.com; ruf=mailto:dmarc_ruf@emaildefense.proofpoint.com,True,reject,100,r,r,reject,397,Toll Brothers
+398,www.carlyle.com,200,False,"",,False,v=DMARC1; p=reject; fo=1; rua=mailto:dmarc_rua@emaildefense.proofpoint.com; ruf=mailto:dmarc_ruf@emaildefense.proofpoint.com,True,reject,100,r,r,reject,398,Carlyle Group
+400,www.ovintiv.com,200,False,"",,False,,False,,,,,,400,Ovintiv
+401,www.ufpi.com,200,True,"",,False,v=DMARC1; p=reject; rua=mailto:e14f5090564f265@rep.dmarcanalyzer.com; ruf=mailto:e14f5090564f265@for.dmarcanalyzer.com; pct=100; fo=1;,True,reject,100,r,r,reject,401,UFP Industries
+402,www.ulta.com,200,False,"",,False,v=DMARC1; p=reject; fo=1; rua=mailto:dmarc_rua@emaildefense.proofpoint.com; ruf=mailto:dmarc_ruf@emaildefense.proofpoint.com;,True,reject,100,r,r,reject,402,Ulta Beauty
+403,www.cbrands.com,200,False,"",,False,v=DMARC1; p=reject; fo=1; rua=mailto:dmarc_rua@emaildefense.proofpoint.com; ruf=mailto:dmarc_ruf@emaildefense.proofpoint.com,True,reject,100,r,r,reject,403,Constellation Brands
+404,www.expediagroup.com,200,False,"",,False,"v=DMARC1; p=reject; fo=1; rua=mailto:expedia@rua.netcraft.com,mailto:dmarc_agg@dmarc.250ok.net ; ruf=mailto:expedia@ruf.netcraft.com,mailto:dmarc_fr@dmarc.250ok.net; pct=100; rf=afrf",True,reject,100,r,r,reject,404,Expedia Group
+405,www.commscope.com,200,False,"",,False,v=DMARC1; p=none; rua=mailto:ryafobpc@ag.dmarcian.com; ruf=mailto:ryafobpc@fr.dmarcian.com;,True,none,100,r,r,none,405,CommScope Holding
+406,www.celanese.com,200,False,"",,False,,False,,,,,,406,Celanese
+408,www.owenscorning.com,200,False,"",,False,v=DMARC1; p=reject; rua=mailto:lurqpkgz@ag.dmarcian.com; ruf=mailto:lurqpkgz@fr.dmarcian.com;,True,reject,100,r,r,reject,408,Owens Corning
+409,www.campbells.com,200,False,"",,False,v=DMARC1; p=reject; rua=mailto:DMARC@campbells.com; ruf=mailto:DMARCForensics@Campbells.com,True,reject,100,r,r,reject,409,Campbell Soup
+410,www.huntsman.com,200,False,"",,False,"v=DMARC1; p=none; rua=mailto:dmarc_agg@vali.email,mailto:dmarc_reports@huntsman.com; ruf=mailto:dmarc_failures@huntsman.com",True,none,100,r,r,none,410,Huntsman
+411,www.franklinresources.com,200,False,"",,False,,False,,,,,,411,Franklin Resources
+412,www.averydennison.com,200,False,"",,False,v=DMARC1; p=quarantine; sp=none; adkim=r; aspf=r; fo=1; pct=100; ri=3600; rua=mailto:avery-dennison@rua.agari.com; ruf=mailto:avery-dennison@ruf.agari.com,True,quarantine,100,r,r,none,412,Avery Dennison
+413,masco.com,200,False,"mxa-00541a01.gslb.pphosted.com, mxb-00541a01.gslb.pphosted.com",v=spf1 ip4:63.111.19.5 ip4:63.111.19.57 ip4:63.99.223.5 ip4:63.99.223.57 ip4:205.220.172.181 ip4:205.220.160.182 include:spf.protection.outlook.com -all,True,v=DMARC1; p=none; rua=mailto:dmarcreporting@masco.com;,True,none,100,r,r,none,413,Masco
+414,www.centerpointenergy.com,200,False,"",,False,"v=DMARC1; p=none; pct=100; rua=mailto:dmjifvzy@ag.us.dmarcian.com,mailto:dmarc.rua@centerpointenergy.com,mailto:626845fec6411@ag.dmarcly.com;ruf=mailto:dmarc.ruf@centerpointenergy.com,mailto:626845fec6411@fo.dmarcly.com,mailto:dmjifvzy@fr.us.dmarcian.com; fo=1",True,none,100,r,r,none,414,CenterPoint Energy
+415,www.53.com,200,False,"",,False,v=DMARC1; p=reject; sp=none; fo=1; pct=100; ri=3600; rua=mailto:fifththird-dmarc@datafeeds.phishlabs.com; ruf=mailto:fifththird-dmarc@datafeeds.phishlabs.com,True,reject,100,r,r,none,415,Fifth Third Bancorp
+416,www.wecenergygroup.com,200,False,"",,False,,False,,,,,,416,WEC Energy Group
+417,www.spglobal.com,200,False,"",,False,v=DMARC1; p=reject; sp=none; fo=1; ri=3600; rua=mailto:mcgraw-hill@rua.agari.com; ruf=mailto:mcgraw-hill@ruf.agari.com,True,reject,100,r,r,none,417,S&P Global
+418,www.fmglobal.com,200,False,"",,False,v=DMARC1; p=reject; rua=mailto:dmarc_rua@emaildefense.proofpoint.com; ruf=mailto:dmarc_ruf@emaildefense.proofpoint.com;fo=1,True,reject,100,r,r,reject,418,FMGlobal
+419,www.polaris.com,200,False,"",,False,"v=DMARC1; p=reject; pct=100; sp=none; rua=mailto:288fcbd4@inbox.ondmarc.com; ruf=mailto:288fcbd4@inbox.ondmarc.com,mailto:ruf@polaris.com; adkim=r; aspf=r; fo=0; rf=afrf; ri=3600",True,reject,100,r,r,none,419,Polaris
+420,www.williams-sonoma.com,200,False,"",,False,v=DMARC1; p=reject; sp=reject; pct=100; rua=mailto:dmarc_rua@emaildefense.proofpoint.com;ruf=mailto:dmarc_ruf@emaildefense.proofpoint.com,True,reject,100,r,r,reject,420,Williams-Sonoma
+421,www.autoliv.com,200,False,"",,False,,False,,,,,,421,Autoliv
+422,www.ajg.com,200,False,"",,False,v=DMARC1; p=none; rua=mailto:dmarc_agg@vali.email;,True,none,100,r,r,none,422,Arthur J. Gallagher
+423,www.motorolasolutions.com,200,True,"",,False,v=DMARC1; p=quarantine; fo=1; rua=mailto:dmarc_rua@emaildefense.proofpoint.com; ruf=mailto:dmarc_ruf@emaildefense.proofpoint.com,True,quarantine,100,r,r,quarantine,423,Motorola Solutions
+424,www.zillowgroup.com,200,False,"",,False,v=DMARC1; p=none; sp=none; rua=mailto:00db9-7704@rua.dmarc.emailanalyst.com; ruf=mailto:00db9-7704@ruf.dmarc.emailanalyst.com; adkim=r; aspf=r; ri=43200,True,none,100,r,r,none,424,Tillow Group
+425,www.opendoor.com,200,False,"",,False,"v=DMARC1; p=quarantine; rua=mailto:re+l8yhyyubzg1@dmarc.postmarkapp.com,mailto:dmarc@opendoor.com,mailto:dmarc_agg@dmarc.250ok.net; ruf=mailto:dmarc@opendoor.com,mailto:dmarc_fr@dmarc.250ok.net; fo=1; aspf=r; pct=100; sp=quarantine;",True,quarantine,100,r,r,quarantine,425,Opendoor Technologies
+426,www.jmsmucker.com,200,False,"",,False,v=DMARC1; p=reject; rua=mailto:dmarc_agg@vali.email,True,reject,100,r,r,reject,426,J.M. Smucker
+427,www.anywhere.re,200,False,"",,False,v=DMARC1; p=quarantine; rua=mailto:dmarc_agg@vali.email,True,quarantine,100,r,r,quarantine,427,Anywhere Real Estate
+428,www.oshkosh.com,200,False,"",,False,v=DMARC1; p=reject; fo=1; rua=mailto:dmarc@oshkosh.com,True,reject,100,r,r,reject,428,Oshkosh
+430,gxo.com,200,False,"mxa-0065eb01.gslb.pphosted.com, mxb-0065eb01.gslb.pphosted.com",v=spf1 exists:%{i}._i.%{d}._d.espf.agari.com include:_spf.qualtrics.com include:%{d}.fc.spf-protect.agari.com include:_spf.atlassian.net include:_spf.smtprelay.snel.com -all,False,v=DMARC1;p=quarantine;fo=1;pct=60;ri=3600;rua=mailto:gxo@rua.agari.com;ruf=mailto:gxo@ruf.agari.com,True,quarantine,60,r,r,quarantine,430,GXO Logistics
+431,www.apa.org,200,False,"",,False,v=DMARC1; p=none; fo=1; rua=mailto:dmarc_rua@emaildefense.proofpoint.com; ruf=mailto:dmarc_ruf@emaildefense.proofpoint.com,True,none,100,r,r,none,431,APA
+432,www.bc.com,200,False,"",,False,v=DMARC1;p=none;fo=1;rua=mailto:dmarc_rua@emaildefense.proofpoint.com;ruf=mailto:dmarc_ruf@emaildefense.proofpoint.com,True,none,100,r,r,none,432,Boise Cascade
+433,www.dovercorporation.com,200,False,"",,False,,False,,,,,,433,Dover
+434,www.genworth.com,200,False,"",,False,v=DMARC1; p=none; rua=mailto:dmarcreports@genworth.com; ruf=mailto:dmarcreports@genworth.com; sp=none; aspf=r; fo=s; ri=86400,True,none,100,r,r,none,434,Genworth Financial
+435,www.bathandbodyworks.com,200,False,"",,False,v=DMARC1; p=reject; fo=1; rua=mailto:dmarc_rua@emaildefense.proofpoint.com; ruf=mailto:dmarc_ruf@emaildefense.proofpoint.com,True,reject,100,r,r,reject,435,Bath & Body Works
+436,www.coinbase.com,200,False,"",v=spf1 -all,True,"v=DMARC1; p=reject; sp=reject; adkim=s; aspf=s; fo=1; rua=mailto:jpohmdhp@ag.dmarcian.com,mailto:dmarc_agg@dmarc.250ok.net; ruf=mailto:jpohmdhp@fr.dmarcian.com,mailto:coinbase-external-abuse@spam.riskiq.net,mailto:dmarc_fr@dmarc.250ok.net;",True,reject,100,s,s,reject,436,Booz Allen Hamilton Holding
+437,www.coinbase.com,200,False,"",v=spf1 -all,True,"v=DMARC1; p=reject; sp=reject; adkim=s; aspf=s; fo=1; rua=mailto:jpohmdhp@ag.dmarcian.com,mailto:dmarc_agg@dmarc.250ok.net; ruf=mailto:jpohmdhp@fr.dmarcian.com,mailto:coinbase-external-abuse@spam.riskiq.net,mailto:dmarc_fr@dmarc.250ok.net;",True,reject,100,s,s,reject,437,Coinbase Global
+438,www.zimmerbiomet.com,200,False,"",,False,v=DMARC1; p=none; rua=mailto:dmarc@zimmerbiomet.com,True,none,100,r,r,none,438,Zimmer Biomet Holdings
+439,www.wabteccorp.com,200,False,"",,False,v=DMARC1; p=none; rua=mailto:dmarc_rua@emaildefense.proofpoint.com; ruf=mailto:dmarc_ruf@emaildefense.proofpoint.com; fo=1,True,none,100,r,r,none,439,Westinghouse Air Break Technologies
+440,www.zoetis.com,200,False,"",,False,v=DMARC1; p=none; fo=1; rua=mailto:dmarc_rua@emaildefense.proofpoint.com; ruf=mailto:dmarc_ruf@emaildefense.proofpoint.com,True,none,100,r,r,none,440,Zoetis
+441,www.packagingcorp.com,200,False,"",,False,v=DMARC1; p=none; fo=1; rua=mailto:dmarc_rua@emaildefense.proofpoint.com; ruf=mailto:dmarc_ruf@emaildefense.proofpoint.com,True,none,100,r,r,none,441,Packaging Corp. of America
+442,www.lpl.com,200,False,"",,False,,False,,,,,,442,LPL Financial Holdings
+443,www.troweprice.com,200,False,"",,False,v=DMARC1; p=quarantine; fo=1; rua=mailto:dmarc_rua@emaildefense.proofpoint.com; ruf=mailto:dmarc_ruf@emaildefense.proofpoint.com,True,quarantine,100,r,r,quarantine,443,T. Rowe Price
+444,www.troweprice.com,200,False,"",,False,v=DMARC1; p=quarantine; fo=1; rua=mailto:dmarc_rua@emaildefense.proofpoint.com; ruf=mailto:dmarc_ruf@emaildefense.proofpoint.com,True,quarantine,100,r,r,quarantine,444,Fortune Brands Home & Security
+446,amark.com,200,False,"",v=spf1 mx a ip4:67.135.93.70 ip4:160.72.194.102 include:us._netblocks.mimecast.com a:mxe.amark.com a:mxs.amark.com include:spf.protection.outlook.com include:mail.zendesk.com ~all,True,,False,,,,,,446,A-Mark Precious Metals
+447,www.hess.com,200,False,"",,False,,False,,,,,,447,Hess
+448,www.vrtx.com,200,False,"",,False,v=DMARC1;p=none;fo=1;rua=mailto:dmarc_rua@emaildefense.proofpoint.com;ruf=mailto:dmarc_ruf@emaildefense.proofpoint.com,True,none,100,r,r,none,448,Vertex Pharmaceuticals
+449,www.keycorpltd.com,200,False,"",v=spf1 a mx ptr include:secureserver.net ~all,True,,False,,,,,,449,KeyCorp
+450,www.chipotle.com,200,False,"mxa-00200801.gslb.pphosted.com, mxb-00200801.gslb.pphosted.com",v=spf1 mx include:spf.protection.outlook.com include:spf-00200801.pphosted.com include:sendgrid.net include:spf.constantcontact.com include:mailgun.org ip4:23.21.109.197 ip4:23.21.109.212 ip4:147.160.167.0/26 ~all,True,v=DMARC1; p=none; rua=mailto:chipotle+rua@dmarc.area1reports.com; ruf=mailto:chipotle+ruf@dmarc.area1reports.com; fo=1,True,none,100,r,r,none,450,Chipotle Mexican Grill
+451,www.cmsenergy.com,200,True,"",,False,v=DMARC1; p=none; fo=1; rua=mailto:dmarc_rua@emaildefense.proofpoint.com; ruf=mailto:dmarc_ruf@emaildefense.proofpoint.com,True,none,100,r,r,none,451,CMS Energy
+452,www.arconic.com,200,False,"",,False,"v=DMARC1; p=none; fo=1; rua=mailto:pxa4qtrz@ag.dmarcian.com, mailto:3a93bf32@mxtoolbox.dmarc-report.com; ruf=mailto:3a93bf32@forensics.dmarc-report.com;",True,none,100,r,r,none,452,Arconic
+453,www.taylormorrison.com,200,False,"",,False,v=DMARC1; p=quarantine; pct=100; sp=none; aspf=r;,True,quarantine,100,r,r,none,453,Taylor Morrison Home
+454,www.afginc.com,200,False,"",,False,,False,,,,,,454,American Financial Group
+455,www.ugicorp.com,200,False,"",,False,,False,,,,,,455,UGI
+456,www.saic.com,200,False,"",,False,v=DMARC1; p=none; rua=mailto:dmarc-rua@saic.com; ruf=mailto:dmarc-ruf@saic.com; fo=1;,True,none,100,r,r,none,456,Science Applications International
+457,www.avantorsciences.com,200,False,"",,False,v=DMARC1;p=quarantine;rua=mailto:dmarc.reports@avantorsciences.com;ruf=mailto:dmarc.reports@avantorsciences.com;sp=reject;ri=84600,True,quarantine,100,r,r,reject,457,Avantor
+458,www.hanes.com,200,False,"",,False,v=DMARC1;p=none;fo=1;rua=mailto:dmarc_rua@emaildefense.proofpoint.com;ruf=mailto:dmarc_ruf@emaildefense.proofpoint,True,none,100,r,r,none,458,Hanesbrands
+459,www.clorox.com,200,False,"",,False,v=DMARC1; p=quarantine; fo=1; rua=mailto:dmarc_rua@emaildefense.proofpoint.com; ruf=mailto:dmarc_ruf@emaildefense.proofpoint.com,True,quarantine,100,r,r,quarantine,459,Clorox
+460,www.kbr.com,200,False,"",,False,v=DMARC1; p=quarantine; rua=mailto:6250981336556@ag.dmarcly.com; ruf=mailto:6250981336556@fo.dmarcly.com; sp=reject; fo=0;,True,quarantine,100,r,r,reject,460,KBR
+461,www.ta-petro.com,200,False,"",,False,v=DMARC1; p=none; fo=1; rua=mailto:dmarc_rua@emaildefense.proofpoint.com; ruf=mailto:dmarc_ruf@emaildefense.proofpoint.com,True,none,100,r,r,none,461,TravelCenters of America
+462,ir.hertz.com,200,False,"",,False,"v=DMARC1; p=none; fo=1; rua=mailto:dmarc_rua@emaildefense.proofpoint.com,mailto:dmarc_rua@hertz.com; ruf=mailto:dmarc_ruf@emaildefense.proofpoint.com,mailto:dmarc_ruf@hertz.com",True,none,100,r,r,none,462,Hertz Global Holdings
+463,www.analog.com,200,False,"",,False,v=DMARC1; p=none; fo=1; rua=mailto:dmarc_rua@emaildefense.proofpoint.com; ruf=mailto:dmarc_ruf@emaildefense.proofpoint.com,True,none,100,r,r,none,463,Analog Devices
+464,www.securian.com,200,False,"",,False,v=DMARC1; p=none; rua=mailto:dmarc_rua@emaildefense.proofpoint.com; ruf=mailto:dmarc_ruf@emaildefense.proofpoint.com;fo=1,True,none,100,r,r,none,464,Securian Financial Group
+465,www.darden.com,200,False,"",,False,v=DMARC1; p=reject; fo=1; rua=mailto:dmarc_rua@emaildefense.proofpoint.com; ruf=mailto:dmarc_ruf@emaildefense.proofpoint.com,True,reject,100,r,r,reject,465,Darden Restaurants
+466,www.graphicpkg.com,200,False,"",,False,,False,,,,,,466,Graphic Packaging Holding
+467,www.ncr.com,200,False,"",,False,v=DMARC1;p=reject;sp=reject;rua=mailto:dmarc_rua@emaildefense.proofpoint.com;ruf=mailto:dmarc_ruf@emaildefense.proofpoint.com;fo=1,True,reject,100,r,r,reject,466,NCR
+469,www.pplindia.org,200,False,"",,False,,False,,,,,,469,PPL
+470,www.cintas.com,200,False,"",,False,v=DMARC1; p=none; fo=1; rua=mailto:dmarc_rua@emaildefense.proofpoint.com; ruf=mailto:dmarc_ruf@emaildefense.proofpoint.com,True,none,100,r,r,none,470,Cintas
+471,www.xerox.com,200,True,"",,False,,False,,,,,,471,Xerox Holdings
+472,www.rockwellautomation.com,200,False,"",,False,v=DMARC1; p=reject; rua=mailto:dmarc_agg@vali.email; ruf=mailto:dmarc@rockwellautomation.com,True,reject,100,r,r,reject,472,Rockwell Automation
+473,www.citizensbank.com,200,False,"",,False,v=DMARC1; p=reject; sp=reject; fo=1; ri=3600; rua=mailto:citizens@rua.agari.com; ruf=mailto:citizens@ruf.agari.com,True,reject,100,r,r,reject,473,Citizens Financial Group
+474,www.kla.com,200,False,"",,False,v=DMARC1; p=none; sp=none; rua=mailto:dmarc@kla-tencor.com; ruf=mailto:dmarc@kla-tencor.com; rf=afrf; pct=100; ri=86400,True,none,100,r,r,none,474,KLA
+475,investor.campingworld.com,200,False,"",,False,,False,,,,,,475,Camping World Holdings
+476,www.ingredion.com,200,False,"",,False,,False,,,,,,476,Ingredion
+477,www.veritivcorp.com,200,False,"",,False,v=DMARC1; p=reject; rua=mailto:dmarc_rua@emaildefense.proofpoint.com; ruf=mailto:dmarc_ruf@emaildefense.proofpoint.com;fo=1,True,reject,100,r,r,reject,477,Veritiv
+478,www.becn.com,200,False,"mx1.hc2766-91.iphmx.com, mx2.hc2766-91.iphmx.com",v=spf1 redirect=spf.mybecn.com,True,v=DMARC1; p=none; rua=mailto:DMARC.Reports@becn.com; ruf=mailto:DMARC.Reports@becn.com,True,none,100,r,r,none,478,Beacon Roofing Supply
+479,ir.diamondbackenergy.com,200,True,"",,False,v=DMARC1; p=quarantine; sp=quarantine; adkim=r; aspf=r; rf=afrf; pct=100; rua=mailto:Postmaster@DiamondbackEnergy.com; fo=1; ri=604800,True,quarantine,100,r,r,quarantine,479,Diamondback Energy
+480,www.victoriassecret.com,200,False,"",,False,v=DMARC1; p=reject; fo=1; rua=mailto:dmarc_rua@emaildefense.proofpoint.com; ruf=mailto:dmarc_ruf@emaildefense.proofpoint.com,True,reject,100,r,r,reject,480,Victoria's Secret
+481,www.academy.com,200,False,"",,False,,False,,,,,,481,Academy Sports and Outdoors
+482,www.sanmina.com,200,False,"",,False,v=DMARC1;p=reject;rua=mailto:dmarc.admin@sanmina.com;ruf=mailto:dmarc.admin@sanmina.com;sp=none;pct=100,True,reject,100,r,r,none,482,Sanmina
+483,www.onsemi.com,200,False,"",,False,v=DMARC1; p=none; rua=mailto:dmarc_rua@emaildefense.proofpoint.com; ruf=mailto:dmarc_ruf@emaildefense.proofpoint.com; fo=1,True,none,100,r,r,none,483,ON Semiconductor
+484,www.cmc.com,200,False,"",,False,v=DMARC1; p=none; fo=1; rua=mailto:dmarc_rua@emaildefense.proofpoint.com;ruf=mailto:dmarc_ruf@emaildefense.proofpoint.com,True,none,100,r,r,none,484,Commercial Metals
+485,www.enlink.com,200,False,"",,False,,False,,,,,,485,EnLink Midstream
+486,www.swn.com,200,False,"",,False,,False,,,,,,486,Southwestern Energy
+487,www.equinix.se,200,False,"",,False,,False,,,,,,487,Equinix
+488,www.dillards.com,200,False,"",,False,v=DMARC1; p=reject; fo=1; rua=mailto:dmarc_rua@emaildefense.proofpoint.com; ruf=mailto:dmarc_ruf@emaildefense.proofpoint.com,True,reject,100,r,r,reject,488,Dillard's
+489,ir.regions.com,200,False,"",,False,v=DMARC1; p=reject; fo=1; rua=mailto:dmarc_rua@emaildefense.proofpoint.com; ruf=mailto:dmarc_ruf@emaildefense.proofpoint.com,True,reject,100,r,r,reject,489,Regions Financial
+490,www.yum.com,200,False,"",,False,v=DMARC1; p=none; sp=reject; fo=1; rua=mailto:wyjtp6ok@ag.dmarcian.com; ruf=mailto:wyjtp6ok@fr.dmarcian.com;,True,none,100,r,r,reject,490,Yum Brands
+491,www.landstar.com,200,False,"",,False,"v=DMARC1; p=reject; rua=mailto:dmarc_agg@vali.email,mailto:cd0a6bbb@mxtoolbox.dmarc-report.com,mailto:dmarc_rua@emaildefense.proofpoint.com; ruf=mailto:cd0a6bbb@forensics.dmarc-report.com,mailto:dmarc_ruf@emaildefense.proofpoint.com; fo=1",True,reject,100,r,r,reject,491,Landstar System
+492,www.cfindustries.com,200,False,"",,False,v=DMARC1; p=none; rua=mailto:dmarc_agg@emailfraudprotect.email; fo=1; ri=3600,True,none,100,r,r,none,492,CF Industries Holdings
+493,www.northerntrust.com,200,False,"",,False,"v=DMARC1; p=none; fo=1; rua=mailto:dmarc_agg@auth.returnpath.net,mailto:northern-trust@rua.agari.com; ruf=mailto:dmarc_afrf@auth.returnpath.net,mailto:northern-trust@ruf.agari.com",True,none,100,r,r,none,493,Northern Trust
+494,www.roberthalf.com,200,False,"",,False,v=DMARC1; p=quarantine; rua=mailto:dmarc_agg@vali.email; ruf=mailto:collaborationteam@roberthalf.com; pct=100; fo=0;,True,quarantine,100,r,r,quarantine,494,Robert Half International
+495,www.compass-group.com,200,False,"",,False,v=DMARC1; p=quarantine; pct=100; rua=mailto:gxq2lm1e@ag.eu.dmarcadvisor.com; ruf=mailto:gxq2lm1e@fr.eu.dmarcadvisor.com; fo=1; ri=60; sp=quarantine,True,quarantine,100,r,r,quarantine,495,Compass
+496,shop.hasbro.com,200,False,"",,False,v=DMARC1; p=reject; pct=100; fo=1; ri=3600; rua=mailto:c0f1617a@inbox.ondmarc.com; ruf=mailto:c0f1617a@inbox.ondmarc.com;,True,reject,100,r,r,reject,496,Hasbro
+497,www.ropertech.com,200,True,"",,False,v=DMARC1; p=quarantine; pct=100; rua=mailto:e9zeyzad@ag.dmarcian.com; ruf=mailto:e9zeyzad@fr.dmarcian.com,True,quarantine,100,r,r,quarantine,497,Roper Technologies
+498,www.arkocorp.com,200,False,"",,False,,False,,,,,,498,ARKO
+499,frontier.com,200,False,"mta5.am0.yahoodns.net, mta6.am0.yahoodns.net, mta7.am0.yahoodns.net, mx.dlls.pa.frontiernet.net, mx.frontiernet.net",v=spf1 include:_spf.frontier.com include:_spf.mail.yahoo.com include:sendgrid.net include:mktomail.com include:icpbounce.com include:_spf.act-on.net include:rs-relay.synchronoss.com ~all,False,v=DMARC1; p=none;,True,none,100,r,r,none,499,Frontier Communications

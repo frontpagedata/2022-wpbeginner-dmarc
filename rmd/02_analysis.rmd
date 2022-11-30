@@ -225,10 +225,52 @@ if(save == T){
 # 2 pdfs will then be converted into the pngs using the 04_convert_pdfs_to_pngs.rmd file. 
 ```
 
-```{r}
-domain_ %>%  group_by(domain_$country) %>% count(sort = T) %>% view()
+#load data 
 
-domain_ %>%  group_by(domain_$dmarc_valid) %>% count(sort = T) %>% view()
+```{r}
+
+domain_gov <- read_csv(here("proc_data", "processed by vlad", "domain.gov.csv"), col_names = F)
+error_domain_gov <- read_csv(here("proc_data", "processed by vlad", "error_domain.gov.csv"))
+
+fortune500 <- read_csv(here("proc_data", "processed by vlad", "fortune500.csv"))
+error_fortune500 <- read_csv(here("proc_data", "processed by vlad", "error_fortune500.csv"))
+
+top5kcompanies <- read_csv(here("proc_data", "processed by vlad", "top5kcompanies.csv"))
+error_top5kcompanies <- read_csv(here("proc_data", "processed by vlad", "error_top5kcompanies.csv"))
+
+# As planned, I am providing you the current statistic for both datasets.
+# .gov domains:
+# status code 200-399: 83047 records
+# status code error: 56212 records
+# status code 400+: 13909 records
+# Companies domains:
+# status code 200-399: 109954 records
+# status code error: 21659 records
+# status code 400+: 5313 records
+
+
+```
+
+
+
+
+
+
+```{r}
+
+top5kcompanies %>%  group_by(country) %>% count(sort = T) %>% view()
+error_top5kcompanies %>%  group_by(country) %>% count(sort = T) %>% view()
+
+top5kcompanies %>% group_by(top5kcompanies$dmarc_valid) %>% count(sort = T) %>% view()
+
+fortune500 %>% group_by(fortune500$dmarc_valid) %>% count(sort = T) %>% view()
+
+domain_gov %>% group_by(domain_gov$X33) %>% count(sort = T) %>% view()
+domain_gov %>% filter(!is.na(domain_gov$X3)) %>% View()
+
+error_domain_gov %>% group_by(error_domain_gov$status_code) %>% count(sort = T) %>% view()
+
+  # does not have header
 ```
 
 
