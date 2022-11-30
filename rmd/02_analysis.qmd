@@ -20,6 +20,8 @@ library(stringr) # CRAN v1.4.1
 library(scales)
 ```
 
+Temporarily using a Quarto file, easier for me to work with. Has a nice "code tools" menu to hide/show code or to see the document source.
+
 ```{r}
 #| message: false
 fortune500 <- read_csv(here("proc_data", "processed by vlad", "fortune500.csv"))

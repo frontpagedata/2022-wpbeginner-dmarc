@@ -136,6 +136,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(scales)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
+<p>Temporarily using a Quarto file, easier for me to work with. Has a nice “code tools” menu to hide/show code or to see the document source.</p>
 <div class="cell">
 <details>
 <summary>View code</summary>
@@ -417,52 +418,54 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(scales)</span>
 <span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a><span class="co">#| message: false</span></span>
-<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a>fortune500 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu">here</span>(<span class="st">"proc_data"</span>, <span class="st">"processed by vlad"</span>, <span class="st">"fortune500.csv"</span>))</span>
-<span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a>top5kcompanies <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu">here</span>(<span class="st">"proc_data"</span>, <span class="st">"processed by vlad"</span>, <span class="st">"top5kcompanies.csv"</span>))</span>
-<span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-30"><a href="#cb8-30" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a>Temporarily using a Quarto file, easier for me to work with. Has a nice "code tools" menu to hide/show code or to see the document source.</span>
+<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a><span class="co">#| message: false</span></span>
+<span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a>fortune500 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu">here</span>(<span class="st">"proc_data"</span>, <span class="st">"processed by vlad"</span>, <span class="st">"fortune500.csv"</span>))</span>
+<span id="cb8-30"><a href="#cb8-30" aria-hidden="true" tabindex="-1"></a>top5kcompanies <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu">here</span>(<span class="st">"proc_data"</span>, <span class="st">"processed by vlad"</span>, <span class="st">"top5kcompanies.csv"</span>))</span>
 <span id="cb8-31"><a href="#cb8-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-34"><a href="#cb8-34" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb8-35"><a href="#cb8-35" aria-hidden="true" tabindex="-1"></a>top5kcompanies <span class="sc">%&gt;%</span> <span class="fu">count</span>(dmarc_valid)</span>
-<span id="cb8-36"><a href="#cb8-36" aria-hidden="true" tabindex="-1"></a>fortune500 <span class="sc">%&gt;%</span> <span class="fu">count</span>(dmarc_valid)</span>
-<span id="cb8-37"><a href="#cb8-37" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-38"><a href="#cb8-38" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb8-39"><a href="#cb8-39" aria-hidden="true" tabindex="-1"></a>trying out half-donut plots for the dmarc yes/no data</span>
-<span id="cb8-40"><a href="#cb8-40" aria-hidden="true" tabindex="-1"></a>(quite easy to do even for many groups)</span>
-<span id="cb8-43"><a href="#cb8-43" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb8-44"><a href="#cb8-44" aria-hidden="true" tabindex="-1"></a>f500dic <span class="ot">&lt;-</span> fortune500 <span class="sc">%&gt;%</span> <span class="fu">tabyl</span>(dmarc_valid) <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">ymax=</span><span class="fu">cumsum</span>(percent))</span>
-<span id="cb8-45"><a href="#cb8-45" aria-hidden="true" tabindex="-1"></a>top5dic <span class="ot">&lt;-</span> top5kcompanies <span class="sc">%&gt;%</span> <span class="fu">tabyl</span>(dmarc_valid) <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">ymax=</span><span class="fu">cumsum</span>(percent))</span>
-<span id="cb8-46"><a href="#cb8-46" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-47"><a href="#cb8-47" aria-hidden="true" tabindex="-1"></a>f500dic <span class="ot">&lt;-</span> </span>
-<span id="cb8-48"><a href="#cb8-48" aria-hidden="true" tabindex="-1"></a>f500dic <span class="sc">%&gt;%</span> </span>
-<span id="cb8-49"><a href="#cb8-49" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">ymin=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="fu">slice_head</span>(f500dic,<span class="at">n=</span><span class="sc">-</span><span class="dv">1</span>)<span class="sc">$</span>ymax)) <span class="sc">%&gt;%</span> </span>
-<span id="cb8-50"><a href="#cb8-50" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">c</span>(ymax,ymin), rescale, <span class="at">to =</span> pi<span class="sc">*</span><span class="fu">c</span>(<span class="sc">-</span>.<span class="dv">5</span>,.<span class="dv">5</span>), <span class="at">from =</span> <span class="dv">0</span><span class="sc">:</span><span class="dv">1</span>)) <span class="sc">%&gt;%</span> </span>
-<span id="cb8-51"><a href="#cb8-51" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">domtype=</span><span class="st">"Fortune 500 Companies"</span>,</span>
-<span id="cb8-52"><a href="#cb8-52" aria-hidden="true" tabindex="-1"></a>         <span class="at">midangle=</span> <span class="fl">0.5</span><span class="sc">*</span>(ymin <span class="sc">+</span> ymax),</span>
-<span id="cb8-53"><a href="#cb8-53" aria-hidden="true" tabindex="-1"></a>         <span class="at">labspct=</span><span class="fu">paste</span>(<span class="fu">round</span>(percent,<span class="dv">2</span>)<span class="sc">*</span><span class="dv">100</span>,<span class="st">"%"</span>))</span>
-<span id="cb8-54"><a href="#cb8-54" aria-hidden="true" tabindex="-1"></a>top5dic <span class="ot">&lt;-</span> </span>
-<span id="cb8-55"><a href="#cb8-55" aria-hidden="true" tabindex="-1"></a>  top5dic <span class="sc">%&gt;%</span> </span>
-<span id="cb8-56"><a href="#cb8-56" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">ymin=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="fu">slice_head</span>(top5dic,<span class="at">n=</span><span class="sc">-</span><span class="dv">1</span>)<span class="sc">$</span>ymax)) <span class="sc">%&gt;%</span> </span>
-<span id="cb8-57"><a href="#cb8-57" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">c</span>(ymax,ymin), rescale, <span class="at">to =</span> pi<span class="sc">*</span><span class="fu">c</span>(<span class="sc">-</span>.<span class="dv">5</span>,.<span class="dv">5</span>), <span class="at">from =</span> <span class="dv">0</span><span class="sc">:</span><span class="dv">1</span>)) <span class="sc">%&gt;%</span> </span>
-<span id="cb8-58"><a href="#cb8-58" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">domtype=</span><span class="st">"Top 5k Companies"</span>,</span>
-<span id="cb8-59"><a href="#cb8-59" aria-hidden="true" tabindex="-1"></a>         <span class="at">midangle=</span> <span class="fl">0.5</span><span class="sc">*</span>(ymin <span class="sc">+</span> ymax),</span>
-<span id="cb8-60"><a href="#cb8-60" aria-hidden="true" tabindex="-1"></a>         <span class="at">labspct=</span><span class="fu">paste</span>(<span class="fu">round</span>(percent,<span class="dv">2</span>)<span class="sc">*</span><span class="dv">100</span>,<span class="st">"%"</span>))</span>
-<span id="cb8-61"><a href="#cb8-61" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-62"><a href="#cb8-62" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-63"><a href="#cb8-63" aria-hidden="true" tabindex="-1"></a><span class="fu">bind_rows</span>(f500dic,top5dic) <span class="sc">%&gt;%</span> </span>
-<span id="cb8-64"><a href="#cb8-64" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>()<span class="sc">+</span></span>
-<span id="cb8-65"><a href="#cb8-65" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_arc_bar</span>(<span class="fu">aes</span>(<span class="at">x0 =</span> <span class="dv">0</span>, <span class="at">y0 =</span> <span class="dv">0</span>, <span class="at">r0 =</span> <span class="fl">0.7</span>, <span class="at">r =</span> <span class="dv">1</span>, <span class="at">start =</span> ymin, <span class="at">end =</span> ymax, <span class="at">fill=</span> dmarc_valid), </span>
-<span id="cb8-66"><a href="#cb8-66" aria-hidden="true" tabindex="-1"></a>               <span class="at">colour =</span> <span class="st">"#949398"</span>)<span class="sc">+</span></span>
-<span id="cb8-67"><a href="#cb8-67" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(</span>
-<span id="cb8-68"><a href="#cb8-68" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(</span>
-<span id="cb8-69"><a href="#cb8-69" aria-hidden="true" tabindex="-1"></a>      <span class="at">x =</span> <span class="fl">1.1</span><span class="sc">*</span> <span class="fu">sin</span>(midangle),</span>
-<span id="cb8-70"><a href="#cb8-70" aria-hidden="true" tabindex="-1"></a>      <span class="at">y =</span> <span class="fl">1.1</span> <span class="sc">*</span> <span class="fu">cos</span>(midangle),</span>
-<span id="cb8-71"><a href="#cb8-71" aria-hidden="true" tabindex="-1"></a>      <span class="at">label =</span> labspct</span>
-<span id="cb8-72"><a href="#cb8-72" aria-hidden="true" tabindex="-1"></a>    ))<span class="sc">+</span><span class="fu">coord_fixed</span>() <span class="sc">+</span> </span>
-<span id="cb8-73"><a href="#cb8-73" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>domtype)<span class="sc">+</span><span class="fu">theme_void</span>()</span>
-<span id="cb8-74"><a href="#cb8-74" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb8-32"><a href="#cb8-32" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb8-33"><a href="#cb8-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-36"><a href="#cb8-36" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb8-37"><a href="#cb8-37" aria-hidden="true" tabindex="-1"></a>top5kcompanies <span class="sc">%&gt;%</span> <span class="fu">count</span>(dmarc_valid)</span>
+<span id="cb8-38"><a href="#cb8-38" aria-hidden="true" tabindex="-1"></a>fortune500 <span class="sc">%&gt;%</span> <span class="fu">count</span>(dmarc_valid)</span>
+<span id="cb8-39"><a href="#cb8-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-40"><a href="#cb8-40" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb8-41"><a href="#cb8-41" aria-hidden="true" tabindex="-1"></a>trying out half-donut plots for the dmarc yes/no data</span>
+<span id="cb8-42"><a href="#cb8-42" aria-hidden="true" tabindex="-1"></a>(quite easy to do even for many groups)</span>
+<span id="cb8-45"><a href="#cb8-45" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb8-46"><a href="#cb8-46" aria-hidden="true" tabindex="-1"></a>f500dic <span class="ot">&lt;-</span> fortune500 <span class="sc">%&gt;%</span> <span class="fu">tabyl</span>(dmarc_valid) <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">ymax=</span><span class="fu">cumsum</span>(percent))</span>
+<span id="cb8-47"><a href="#cb8-47" aria-hidden="true" tabindex="-1"></a>top5dic <span class="ot">&lt;-</span> top5kcompanies <span class="sc">%&gt;%</span> <span class="fu">tabyl</span>(dmarc_valid) <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">ymax=</span><span class="fu">cumsum</span>(percent))</span>
+<span id="cb8-48"><a href="#cb8-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-49"><a href="#cb8-49" aria-hidden="true" tabindex="-1"></a>f500dic <span class="ot">&lt;-</span> </span>
+<span id="cb8-50"><a href="#cb8-50" aria-hidden="true" tabindex="-1"></a>f500dic <span class="sc">%&gt;%</span> </span>
+<span id="cb8-51"><a href="#cb8-51" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">ymin=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="fu">slice_head</span>(f500dic,<span class="at">n=</span><span class="sc">-</span><span class="dv">1</span>)<span class="sc">$</span>ymax)) <span class="sc">%&gt;%</span> </span>
+<span id="cb8-52"><a href="#cb8-52" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">c</span>(ymax,ymin), rescale, <span class="at">to =</span> pi<span class="sc">*</span><span class="fu">c</span>(<span class="sc">-</span>.<span class="dv">5</span>,.<span class="dv">5</span>), <span class="at">from =</span> <span class="dv">0</span><span class="sc">:</span><span class="dv">1</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb8-53"><a href="#cb8-53" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">domtype=</span><span class="st">"Fortune 500 Companies"</span>,</span>
+<span id="cb8-54"><a href="#cb8-54" aria-hidden="true" tabindex="-1"></a>         <span class="at">midangle=</span> <span class="fl">0.5</span><span class="sc">*</span>(ymin <span class="sc">+</span> ymax),</span>
+<span id="cb8-55"><a href="#cb8-55" aria-hidden="true" tabindex="-1"></a>         <span class="at">labspct=</span><span class="fu">paste</span>(<span class="fu">round</span>(percent,<span class="dv">2</span>)<span class="sc">*</span><span class="dv">100</span>,<span class="st">"%"</span>))</span>
+<span id="cb8-56"><a href="#cb8-56" aria-hidden="true" tabindex="-1"></a>top5dic <span class="ot">&lt;-</span> </span>
+<span id="cb8-57"><a href="#cb8-57" aria-hidden="true" tabindex="-1"></a>  top5dic <span class="sc">%&gt;%</span> </span>
+<span id="cb8-58"><a href="#cb8-58" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">ymin=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="fu">slice_head</span>(top5dic,<span class="at">n=</span><span class="sc">-</span><span class="dv">1</span>)<span class="sc">$</span>ymax)) <span class="sc">%&gt;%</span> </span>
+<span id="cb8-59"><a href="#cb8-59" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">c</span>(ymax,ymin), rescale, <span class="at">to =</span> pi<span class="sc">*</span><span class="fu">c</span>(<span class="sc">-</span>.<span class="dv">5</span>,.<span class="dv">5</span>), <span class="at">from =</span> <span class="dv">0</span><span class="sc">:</span><span class="dv">1</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb8-60"><a href="#cb8-60" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">domtype=</span><span class="st">"Top 5k Companies"</span>,</span>
+<span id="cb8-61"><a href="#cb8-61" aria-hidden="true" tabindex="-1"></a>         <span class="at">midangle=</span> <span class="fl">0.5</span><span class="sc">*</span>(ymin <span class="sc">+</span> ymax),</span>
+<span id="cb8-62"><a href="#cb8-62" aria-hidden="true" tabindex="-1"></a>         <span class="at">labspct=</span><span class="fu">paste</span>(<span class="fu">round</span>(percent,<span class="dv">2</span>)<span class="sc">*</span><span class="dv">100</span>,<span class="st">"%"</span>))</span>
+<span id="cb8-63"><a href="#cb8-63" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-64"><a href="#cb8-64" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-65"><a href="#cb8-65" aria-hidden="true" tabindex="-1"></a><span class="fu">bind_rows</span>(f500dic,top5dic) <span class="sc">%&gt;%</span> </span>
+<span id="cb8-66"><a href="#cb8-66" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>()<span class="sc">+</span></span>
+<span id="cb8-67"><a href="#cb8-67" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_arc_bar</span>(<span class="fu">aes</span>(<span class="at">x0 =</span> <span class="dv">0</span>, <span class="at">y0 =</span> <span class="dv">0</span>, <span class="at">r0 =</span> <span class="fl">0.7</span>, <span class="at">r =</span> <span class="dv">1</span>, <span class="at">start =</span> ymin, <span class="at">end =</span> ymax, <span class="at">fill=</span> dmarc_valid), </span>
+<span id="cb8-68"><a href="#cb8-68" aria-hidden="true" tabindex="-1"></a>               <span class="at">colour =</span> <span class="st">"#949398"</span>)<span class="sc">+</span></span>
+<span id="cb8-69"><a href="#cb8-69" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(</span>
+<span id="cb8-70"><a href="#cb8-70" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(</span>
+<span id="cb8-71"><a href="#cb8-71" aria-hidden="true" tabindex="-1"></a>      <span class="at">x =</span> <span class="fl">1.1</span><span class="sc">*</span> <span class="fu">sin</span>(midangle),</span>
+<span id="cb8-72"><a href="#cb8-72" aria-hidden="true" tabindex="-1"></a>      <span class="at">y =</span> <span class="fl">1.1</span> <span class="sc">*</span> <span class="fu">cos</span>(midangle),</span>
+<span id="cb8-73"><a href="#cb8-73" aria-hidden="true" tabindex="-1"></a>      <span class="at">label =</span> labspct</span>
+<span id="cb8-74"><a href="#cb8-74" aria-hidden="true" tabindex="-1"></a>    ))<span class="sc">+</span><span class="fu">coord_fixed</span>() <span class="sc">+</span> </span>
+<span id="cb8-75"><a href="#cb8-75" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>domtype)<span class="sc">+</span><span class="fu">theme_void</span>()</span>
+<span id="cb8-76"><a href="#cb8-76" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 </code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
