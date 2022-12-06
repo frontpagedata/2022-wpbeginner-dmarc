@@ -5,6 +5,9 @@ format:
     code-fold: true
     code-tools: true
     code-summary: "View code"
+    embed-resources: true
+execute: 
+  warning: false
 editor: visual
 ---
 
@@ -18,16 +21,27 @@ library(ggplot2) # CRAN v3.4.0
 library(ggforce) # CRAN v0.4.1
 library(stringr) # CRAN v1.4.1
 library(scales)
+library(rnaturalearth)
+library(gggibbous)
+library(sf)
+library(scico)
+library(forcats)
 ```
 
 Temporarily using a Quarto file, easier for me to work with. Has a nice "code tools" menu to hide/show code or to see the document source.
 
+Read the data
 ```{r}
 #| message: false
+#| echo: false
 fortune500 <- read_csv(here("proc_data", "processed by vlad", "fortune500.csv"))
 top5kcompanies <- read_csv(here("proc_data", "processed by vlad", "top5kcompanies.csv"))
 
 ```
+
+Generally tally  
+
+Very different sample sizes, but in general domains for F500 companies twice as likely to have dmarc enabled as the global top5k company domains
 
 ```{r}
 top5kcompanies %>% count(dmarc_valid)
@@ -67,5 +81,162 @@ ggplot()+
       label = labspct
     ))+coord_fixed() + 
   facet_wrap(~domtype)+theme_void()
+```
+
+Of the 379 Fortune 500 companies with dmarc enabled, almost half of them have the preferable policy of rejecting questionable messages. 14% are configure to quarantine these messages, but almost 40% have no dmarc policy set.
+
+
+```{r}
+f500policies <- fortune500 %>% filter(!is.na(dmarc_tags_p_value)) %>% tabyl(dmarc_tags_p_value)
+f500policies <- 
+f500policies %>% mutate(ymax=cumsum(percent)) %>% 
+  mutate(ymin=c(0,slice_head(.,n=-1)$ymax)) %>% 
+  mutate(across(c(ymax,ymin), rescale, to = pi*c(-.5,.5), from = 0:1)) %>% 
+  mutate(domtype="Fortune 500 Companies",
+         midangle= 0.5*(ymin + ymax),
+         labspct=paste(round(percent,2)*100,"%"))
+
+top5kpolicies <- top5kcompanies %>% filter(!is.na(dmarc_tags_p_value)) %>% tabyl(dmarc_tags_p_value)
+top5kpolicies <- 
+  top5kpolicies %>% mutate(ymax=cumsum(percent)) %>% 
+  mutate(ymin=c(0,slice_head(.,n=-1)$ymax)) %>% 
+  mutate(across(c(ymax,ymin), rescale, to = pi*c(-.5,.5), from = 0:1)) %>% 
+  mutate(domtype="Top 5k Companies",
+         midangle= 0.5*(ymin + ymax),
+         labspct=paste(round(percent,2)*100,"%"))
+
+
+bind_rows(f500policies,top5kpolicies) %>% 
+ggplot()+
+  geom_arc_bar(aes(x0 = 0, y0 = 0, r0 = 0.7, r = 1, start = ymin, end = ymax, 
+                   fill= dmarc_tags_p_value), 
+               colour = "#949398")+
+  geom_arc(aes(x0 = 0, y0 = 0, r = 0.68,start = ymin, end = ymax),color="grey")+
+  geom_point(aes(x=0,y=0.68),pch=3,color="grey")+
+  geom_text(
+    aes(
+      x = 1.1* sin(midangle),
+      y = 1.1 * cos(midangle),
+      label = labspct
+    ))+facet_wrap(~domtype)+
+  coord_fixed() +theme_void()
+```
+
+## By country - Top5k
+
+By country, dmarc coverage (top5k companies) varied between 50 (Netherlands) to 90 % (South Korea)
+
+```{r}
+top5kprops_country <- 
+top5kcompanies %>%   count(country,dmarc_valid) %>%
+  group_by(country) %>%
+  mutate(pct = prop.table(n)) 
+cty_min_dmarc <- top5kprops_country  %>% mutate(x=1,y=1,maxpct=max(pct)) %>% ungroup() %>% 
+  slice_min(maxpct,n=1) %>% pull(country) %>% unique
+cty_max_dmarc <- top5kprops_country  %>% mutate(x=1,y=1,maxpct=max(pct)) %>% ungroup() %>% 
+  slice_max(maxpct,n=1) %>% pull(country) %>% unique
+```
+
+For most countries, dmarc coverage ranged between 60 and 80% 
+
+```{r}
+top5kprops_country  %>% mutate(x=1,y=1,maxpct=max(pct)) %>% 
+  arrange(desc(maxpct)) %>% ungroup() %>% 
+  filter(dmarc_valid!=FALSE) %>% 
+  ggplot()+
+  geom_histogram(aes(x=maxpct))+labs(x="dmarc coverage (%)")
+
+```
+
+## Top5k by region (UN regions)
+```{r}
+countriesdat <- ne_countries(scale = 50,returnclass = "sf")
+regionsun <- countriesdat %>% select(name,region_un,formal_en,name_long) 
+
+top5kprops_country_names <- 
+top5kprops_country  %>% mutate(x=1,y=1,maxpct=max(pct)) %>% 
+  arrange(desc(maxpct)) %>% ungroup() %>% 
+  filter(dmarc_valid!=FALSE) %>% mutate(ctyname=str_to_title(country)) %>% 
+  mutate(ctyname2=case_when(
+    ctyname=="South Korea"~"Korea",
+    ctyname=="Czechia"~"Czech Rep.",
+    TRUE~ctyname
+  ))
+
+top5kprops_country_spat <- left_join(top5kprops_country_names,regionsun,by=c("ctyname2"="name"))
+
+top5kprops_country_spat %>% 
+  ggplot(aes(y=maxpct,x=region_un,color=region_un))+
+  geom_boxplot()+
+  geom_sina()+
+  labs(y="dmarc coverage (%)")
+
+```
+
+dmarc coverage (% enabled) varies within regions
+
+```{r}
+
+
+top5kprops_country_spat %>% 
+  filter(region_un=="Asia") %>% 
+  ggplot()+
+  geom_moon(aes(x,y,ratio=1-maxpct),fill="white",color="grey",size=28)+
+  geom_moon(aes(x,y,ratio=maxpct),right=FALSE,fill="#317373",color="grey",size=28)+
+  geom_text(aes(x,y,label=paste0(round(maxpct*100,1),"%")))+
+  facet_wrap(~fct_reorder(ctyname2,1-maxpct),scales = "free")+
+  labs(title = "Asia")+
+  theme_void()
+    
+top5kprops_country_spat %>% 
+  filter(region_un=="Africa") %>% 
+  ggplot()+
+  geom_moon(aes(x,y,ratio=1-maxpct),fill="white",color="grey",size=25)+
+  geom_moon(aes(x,y,ratio=maxpct),right=FALSE,fill="#317373",color="grey",size=25)+
+  geom_text(aes(x,y,label=paste0(round(maxpct*100,1),"%")))+
+  facet_wrap(~fct_reorder(ctyname2,1-maxpct),scales = "free")+
+  labs(title = "Africa")+
+  theme_void()
+
+top5kprops_country_spat %>% 
+  filter(region_un=="Americas") %>% 
+  ggplot()+
+  geom_moon(aes(x,y,ratio=1-maxpct),fill="white",color="grey",size=35)+
+  geom_moon(aes(x,y,ratio=maxpct),right=FALSE,fill="#317373",color="grey",size=35)+
+  geom_text(aes(x,y,label=paste0(round(maxpct*100,1),"%")))+
+  facet_wrap(~fct_reorder(ctyname2,1-maxpct),scales = "free")+
+  labs(title = "Americas")+
+  theme_void()
+
+
+top5kprops_country_spat %>% 
+  filter(region_un=="Europe") %>% 
+  ggplot()+
+  geom_moon(aes(x,y,ratio=1-maxpct),fill="white",color="grey",size=25)+
+  geom_moon(aes(x,y,ratio=maxpct),right=FALSE,fill="#317373",color="grey",size=25)+
+  geom_text(aes(x,y,label=paste0(round(maxpct*100,1),"%")))+
+  facet_wrap(~fct_reorder(ctyname2,1-maxpct),scales = "free")+
+  labs(title = "Europe")+
+  theme_void()
+
+top5kprops_country_spat %>% 
+  filter(region_un=="Oceania") %>% 
+  ggplot()+
+  geom_moon(aes(x,y,ratio=1-maxpct),fill="white",color="grey",size=35)+
+  geom_moon(aes(x,y,ratio=maxpct),right=FALSE,fill="#317373",color="grey",size=35)+
+  geom_text(aes(x,y,label=paste0(round(maxpct*100,1),"%")))+
+  facet_wrap(~fct_reorder(ctyname2,1-maxpct),scales = "free")+
+  labs(title = "Oceania")+
+  theme_void()
+```
+
+On a map:
+```{r}
+  ggplot()+
+    geom_sf(data=countriesdat,fill="gray",linewidth=0.05)+
+    geom_sf(data=st_as_sf(top5kprops_country_spat),aes(fill=maxpct))+
+    scale_fill_scico(palette = "davos",direction = -1,name="% dmarc enabled domains")+
+    theme_void()
+
 ```
 
