@@ -13,6 +13,8 @@ editor: visual
 
 ```{r setup}
 #| message: false
+#| include: false
+#| echo: false
 library(dplyr)   # CRAN v1.0.10
 library(readr)   # CRAN v2.1.3
 library(here)    # CRAN v1.0.1
@@ -26,6 +28,8 @@ library(gggibbous)
 library(sf)
 library(scico)
 library(forcats)
+library(urltools)
+suffix_refresh()
 ```
 
 Temporarily using a Quarto file, easier for me to work with. Has a nice "code tools" menu to hide/show code or to see the document source.
@@ -36,12 +40,31 @@ Read the data
 #| echo: false
 fortune500 <- read_csv(here("proc_data", "processed by vlad", "fortune500.csv"))
 top5kcompanies <- read_csv(here("proc_data", "processed by vlad", "top5kcompanies.csv"))
+domain_gov <- read_csv(here("proc_data", "processed by Luis", "domain_gov_names_deduplicated.csv"),
+                       col_types = cols(use_case = "c",comments="c")) %>% 
+  remove_empty("cols",quiet = FALSE)
+
 
 ```
 
-Generally tally  
+# General tally  
 
-Very different sample sizes, but in general domains for F500 companies twice as likely to have dmarc enabled as the global top5k company domains
+```{r}
+ncountries_gov <- domain_gov %>% 
+  distinct(country) %>% nrow()
+```
+
+Different sample sizes.  
+
+The top5kcompanies dataset includes `r nrow(top5kcompanies)` websites.  
+
+The Fortune 500 companies dataset includes `r nrow(fortune500)` websites.  
+
+The government domains data includes `r nrow(domain_gov)` websites from `r ncountries_gov` countries.
+
+### DMARC
+
+In general, domains for F500 companies are twice as likely to have dmarc enabled as the global top5k company domains
 
 ```{r}
 top5kcompanies %>% count(dmarc_valid)
