@@ -27,6 +27,7 @@ library(rnaturalearth)
 library(gggibbous)
 library(sf)
 library(scico)
+library(gt)
 library(forcats)
 library(urltools)
 suffix_refresh()
@@ -35,6 +36,7 @@ suffix_refresh()
 Temporarily using a Quarto file, easier for me to work with. Has a nice "code tools" menu to hide/show code or to see the document source.
 
 Read the data
+
 ```{r}
 #| message: false
 #| echo: false
@@ -42,40 +44,55 @@ fortune500 <- read_csv(here("proc_data", "processed by vlad", "fortune500.csv"))
 top5kcompanies <- read_csv(here("proc_data", "processed by vlad", "top5kcompanies.csv"))
 domain_gov <- read_csv(here("proc_data", "processed by Luis", "domain_gov_names_deduplicated.csv"),
                        col_types = cols(use_case = "c",comments="c")) %>% 
-  remove_empty("cols",quiet = FALSE)
-
+  filter(!is.na(dmarc_valid))
 
 ```
 
-# General tally  
+# General tally
 
 ```{r}
 ncountries_gov <- domain_gov %>% 
   distinct(country) %>% nrow()
+ncountries_top5k <-  top5kcompanies %>% distinct(country) %>% nrow()
+
+n_top5k <- nrow(top5kcompanies)
+n_f500 <- nrow(fortune500)
+n_gov <- nrow(domain_gov)
 ```
 
-Different sample sizes.  
+Different sample sizes.
 
-The top5kcompanies dataset includes `r nrow(top5kcompanies)` websites.  
+::: {style="font-size: 1.4em"}
+The top5kcompanies dataset includes **`r nrow(top5kcompanies)`** websites from **`r ncountries_top5k`** countries.
 
-The Fortune 500 companies dataset includes `r nrow(fortune500)` websites.  
+The Fortune 500 companies dataset includes **`r nrow(fortune500)`** websites.
 
-The government domains data includes `r nrow(domain_gov)` websites from `r ncountries_gov` countries.
+The government domains dataset includes **`r nrow(domain_gov)`** websites from **`r ncountries_gov`** countries.
+
+:::
+
+
 
 ### DMARC
-
-In general, domains for F500 companies are twice as likely to have dmarc enabled as the global top5k company domains
-
 ```{r}
-top5kcompanies %>% count(dmarc_valid)
-fortune500 %>% count(dmarc_valid)
-
+dmvalidf500 <- fortune500 %>% tabyl(dmarc_valid) %>% filter(dmarc_valid==TRUE) %>% pull(percent) %>% round(2)
+dmvalidgov <- domain_gov  %>% tabyl(dmarc_valid) %>% filter(dmarc_valid==TRUE) %>% pull(percent) %>% round(2)
+dmvalid5k <- top5kcompanies %>%  tabyl(dmarc_valid) %>% filter(dmarc_valid==TRUE) %>% pull(percent) %>% round(2)
 ```
-trying out half-donut plots for the dmarc yes/no data
-(quite easy to do even for many groups)
+
+The proportions of domains with DMARC enabled vary widely. 
+
+::: {style="font-size: 1.4em"}
+Fortune 500 companies had the highest DMARC coverage (**`r dmvalidf500`**), while government domains and top5k companies had a similarly low proportion of DMARC-enabled domains (**`r dmvalidgov`** and **`r dmvalid5k`** respectively).
+:::
+
+In general, domains for F500 companies are twice as likely to have DMARC enabled as govt or global top5k company domains.
+
+
 ```{r}
 f500dic <- fortune500 %>% tabyl(dmarc_valid) %>% mutate(ymax=cumsum(percent))
 top5dic <- top5kcompanies %>% tabyl(dmarc_valid) %>% mutate(ymax=cumsum(percent))
+govtdic <- domain_gov %>% tabyl(dmarc_valid) %>% mutate(ymax=cumsum(percent))
 
 f500dic <- 
 f500dic %>% 
@@ -83,84 +100,124 @@ f500dic %>%
   mutate(across(c(ymax,ymin), rescale, to = pi*c(-.5,.5), from = 0:1)) %>% 
   mutate(domtype="Fortune 500 Companies",
          midangle= 0.5*(ymin + ymax),
-         labspct=paste(round(percent,2)*100,"%"))
+         labspct=paste(round(percent,2)*100,"%"),
+         n=paste("n =",n_f500))
+
 top5dic <- 
   top5dic %>% 
   mutate(ymin=c(0,slice_head(top5dic,n=-1)$ymax)) %>% 
   mutate(across(c(ymax,ymin), rescale, to = pi*c(-.5,.5), from = 0:1)) %>% 
   mutate(domtype="Top 5k Companies",
          midangle= 0.5*(ymin + ymax),
-         labspct=paste(round(percent,2)*100,"%"))
+         labspct=paste(round(percent,2)*100,"%"),
+         n=paste("n =",n_top5k))
+
+govtdic <- 
+  govtdic %>% 
+  mutate(ymin=c(0,slice_head(govtdic,n=-1)$ymax)) %>% 
+  mutate(across(c(ymax,ymin), rescale, to = pi*c(-.5,.5), from = 0:1)) %>% 
+  mutate(domtype="Government Domains",
+         midangle= 0.5*(ymin + ymax),
+         labspct=paste(round(percent,2)*100,"%"),
+         n=paste("n =",n_gov))
 
 
-bind_rows(f500dic,top5dic) %>% 
+bind_rows(f500dic,top5dic,govtdic) %>% 
 ggplot()+
   geom_arc_bar(aes(x0 = 0, y0 = 0, r0 = 0.7, r = 1, start = ymin, end = ymax, fill= dmarc_valid), 
                colour = "#949398")+
-  geom_text(
+  geom_label(
     aes(
       x = 1.1* sin(midangle),
-      y = 1.1 * cos(midangle),
+      y = 0.88 * cos(midangle),
       label = labspct
-    ))+coord_fixed() + 
-  facet_wrap(~domtype)+theme_void()
+    ))+
+  geom_text(aes(x=0,y=0.1,label=n))+
+  coord_fixed() + scale_fill_discrete(name="DMARC enabled")+
+  facet_wrap(~domtype)+theme_void()+
+  theme(legend.position = "bottom")
 ```
 
-Of the 379 Fortune 500 companies with dmarc enabled, almost half of them have the preferable policy of rejecting questionable messages. 14% are configure to quarantine these messages, but almost 40% have no dmarc policy set.
+### DMARC policies
+
+Of the 379 Fortune 500 companies with DMARC enabled, almost half of them (47%) have the preferable policy of rejecting questionable messages. 14% are configured to quarantine these messages, but almost 40% have no DMARC policy set.
+
+Government domains with DMARC enabled (n=29275) have a roughly equal split of approximately 1/3 between reject, quarantine, or no set policy.
+
+For Top5k companies with DMARC enabled (n=36879), 52% have no policy, 25% quarantine, and only 23% reject. 
 
 
 ```{r}
 f500policies <- fortune500 %>% filter(!is.na(dmarc_tags_p_value)) %>% tabyl(dmarc_tags_p_value)
+n_f500dmenabled <- fortune500 %>% filter(dmarc_valid==TRUE) %>% nrow() 
 f500policies <- 
 f500policies %>% mutate(ymax=cumsum(percent)) %>% 
   mutate(ymin=c(0,slice_head(.,n=-1)$ymax)) %>% 
   mutate(across(c(ymax,ymin), rescale, to = pi*c(-.5,.5), from = 0:1)) %>% 
   mutate(domtype="Fortune 500 Companies",
          midangle= 0.5*(ymin + ymax),
-         labspct=paste(round(percent,2)*100,"%"))
+         labspct=paste(round(percent,2)*100,"%"),
+         n=paste("n =",n_f500dmenabled))
 
 top5kpolicies <- top5kcompanies %>% filter(!is.na(dmarc_tags_p_value)) %>% tabyl(dmarc_tags_p_value)
+n_top5kdmenabled <- top5kcompanies %>% filter(dmarc_valid==TRUE) %>% nrow() 
 top5kpolicies <- 
   top5kpolicies %>% mutate(ymax=cumsum(percent)) %>% 
   mutate(ymin=c(0,slice_head(.,n=-1)$ymax)) %>% 
   mutate(across(c(ymax,ymin), rescale, to = pi*c(-.5,.5), from = 0:1)) %>% 
   mutate(domtype="Top 5k Companies",
          midangle= 0.5*(ymin + ymax),
-         labspct=paste(round(percent,2)*100,"%"))
+         labspct=paste(round(percent,2)*100,"%"),
+         n=paste("n =",n_top5kdmenabled))
 
+govpolicies <- domain_gov %>% filter(!is.na(dmarc_tags_p_value)) %>% tabyl(dmarc_tags_p_value)
+n_govdmenabled <- domain_gov %>% filter(dmarc_valid==TRUE) %>% nrow() 
+govpolicies <- 
+  govpolicies %>% mutate(ymax=cumsum(percent)) %>% 
+  mutate(ymin=c(0,slice_head(.,n=-1)$ymax)) %>% 
+  mutate(across(c(ymax,ymin), rescale, to = pi*c(-.5,.5), from = 0:1)) %>% 
+  mutate(domtype="Government Domains",
+         midangle= 0.5*(ymin + ymax),
+         labspct=paste(round(percent,2)*100,"%"),
+         n=paste("n =",n_govdmenabled))
 
-bind_rows(f500policies,top5kpolicies) %>% 
+bind_rows(f500policies,top5kpolicies,govpolicies) %>% 
 ggplot()+
   geom_arc_bar(aes(x0 = 0, y0 = 0, r0 = 0.7, r = 1, start = ymin, end = ymax, 
                    fill= dmarc_tags_p_value), 
                colour = "#949398")+
   geom_arc(aes(x0 = 0, y0 = 0, r = 0.68,start = ymin, end = ymax),color="grey")+
   geom_point(aes(x=0,y=0.68),pch=3,color="grey")+
-  geom_text(
+  geom_label(
     aes(
       x = 1.1* sin(midangle),
       y = 1.1 * cos(midangle),
       label = labspct
     ))+facet_wrap(~domtype)+
-  coord_fixed() +theme_void()
+  scale_fill_discrete(name="DMARC policy")+
+  geom_text(aes(x=0,y=0.1,label=n))+
+  coord_fixed() +theme_void()+
+  theme(legend.position = "bottom")
 ```
 
+# Top 5000 companies
 ## By country - Top5k
 
-By country, dmarc coverage (top5k companies) varied between 50 (Netherlands) to 90 % (South Korea)
+By country, DMARC coverage (top5k companies) varied between 50 (Netherlands) to 90 % (South Korea)
 
 ```{r}
 top5kprops_country <- 
 top5kcompanies %>%   count(country,dmarc_valid) %>%
   group_by(country) %>%
-  mutate(pct = prop.table(n)) 
-cty_min_dmarc <- top5kprops_country  %>% mutate(x=1,y=1,maxpct=max(pct)) %>% ungroup() %>% 
+  mutate(pct = prop.table(n)) %>% 
+  mutate(n_ctry=max(cumsum(n)))
+cty_min_dmarc <- top5kprops_country  %>% mutate(x=1,y=1,maxpct=max(pct)) %>% ungroup() %>% filter(dmarc_valid==TRUE) %>% 
   slice_min(maxpct,n=1) %>% pull(country) %>% unique
-cty_max_dmarc <- top5kprops_country  %>% mutate(x=1,y=1,maxpct=max(pct)) %>% ungroup() %>% 
+cty_max_dmarc <- top5kprops_country  %>% mutate(x=1,y=1,maxpct=max(pct)) %>% ungroup() %>%filter(dmarc_valid==TRUE) %>% 
   slice_max(maxpct,n=1) %>% pull(country) %>% unique
 ```
 
-For most countries, dmarc coverage ranged between 60 and 80% 
+For most countries, dmarc coverage ranged between 60 and 80%
 
 ```{r}
 top5kprops_country  %>% mutate(x=1,y=1,maxpct=max(pct)) %>% 
@@ -171,7 +228,86 @@ top5kprops_country  %>% mutate(x=1,y=1,maxpct=max(pct)) %>%
 
 ```
 
-## Top5k by region (UN regions)
+## By Industry - Top5k
+
+
+
+```{r}
+
+n_industries_top5k <- top5kcompanies %>% 
+ distinct(industry) %>% nrow()
+  
+#top5kcompanies %>% count(industry) %>% arrange(-n) %>% head(10)
+#top5kcompanies %>% count(industry) %>% arrange(-n) %>% tail(10)
+
+top5indprop <- 
+top5kcompanies %>% 
+ count(industry,dmarc_valid) %>%
+  group_by(industry) %>%
+  mutate(pct = prop.table(n)) %>% 
+  mutate(n_ind=max(cumsum(n))) %>% 
+  filter(dmarc_valid==TRUE) %>% arrange(desc(pct))
+
+
+
+#top5indprop$pct %>% summary()
+
+
+```
+The Top5k Companies dataset includes **`r n_industries_top5k`** distinct industries, which vary in DMARC coverage and representation.
+
+
+The proportion of domains with DMARC security varies by industry, from 8% (graphic design; n=45) to 59% (Banking, n=1241)
+
+```{r}
+top5indprop %>% ungroup %>% slice_max(pct,n=1) %>% gt()
+top5indprop %>% ungroup %>% slice_min(pct,n=1) %>% gt()
+```
+
+
+Industries with varying online presence had wide variation in % DMARC tags.
+```{r}
+top5indprop %>% 
+  filter(n_ind>1000) %>% 
+  ggplot()+
+  geom_point(aes(x=fct_reorder(industry,pct),y=pct,size=n_ind,fill=n_ind),pch=21)+
+  coord_flip()+labs(subtitle = "Industries with >1000 domains",x="industry",
+                    y="Proportion of domains with DMARC security")
+
+top5indprop %>% 
+  filter(n_ind>500&n_ind<1000) %>% 
+  ggplot()+
+  geom_point(aes(x=fct_reorder(industry,pct),y=pct,size=n_ind,fill=n_ind),pch=21)+
+  coord_flip()+labs(subtitle = "Industries with 500-1000 domains",x="industry",
+                    y="Proportion of domains with DMARC security")
+
+top5indprop %>% 
+  filter(n_ind<500) %>% 
+  ggplot()+
+  geom_point(aes(x=fct_reorder(industry,pct),y=pct,size=n_ind,fill=n_ind),pch=21)+
+  coord_flip()+labs(subtitle = "Industries with < 500 domains",x="industry",
+                    y="Proportion of domains with DMARC security")
+```
+
+
+The web presence of a particular industry (number of domains) did not relate with the proportion of DMARC enabled domains.
+
+```{r}
+ggplot(top5indprop)+
+  geom_point(aes(x=n_ind,y=pct))+
+  labs(x="Number of domains per industry",y="Proportion of domains with DMARC security")
+```
+
+For 162 websites in the _Computer & network security_ industry, only 33% had valid DMARC tags.
+
+```{r}
+#| include: false
+top5indprop %>% filter(industry=="computer & network security") %>% pull(pct)
+top5indprop %>% filter(industry=="computer & network security") %>% pull(n_ind)
+```
+
+## By Region - Top5k (UN regions)
+
 ```{r}
 countriesdat <- ne_countries(scale = 50,returnclass = "sf")
 regionsun <- countriesdat %>% select(name,region_un,formal_en,name_long) 
@@ -196,7 +332,7 @@ top5kprops_country_spat %>%
 
 ```
 
-dmarc coverage (% enabled) varies within regions
+DMARC coverage (% enabled) varies within regions
 
 ```{r}
 
@@ -204,12 +340,16 @@ dmarc coverage (% enabled) varies within regions
 top5kprops_country_spat %>% 
   filter(region_un=="Asia") %>% 
   ggplot()+
-  geom_moon(aes(x,y,ratio=1-maxpct),fill="white",color="grey",size=28)+
-  geom_moon(aes(x,y,ratio=maxpct),right=FALSE,fill="#317373",color="grey",size=28)+
+  geom_moon(aes(x,y,ratio=1-maxpct),fill="white",color="grey",size=18)+
+  geom_moon(aes(x,y,ratio=maxpct),right=FALSE,fill="#317373",color="grey",size=18)+
   geom_text(aes(x,y,label=paste0(round(maxpct*100,1),"%")))+
+  geom_text(aes(x=1,y=-24,label=paste("n =",n_ctry)))+
   facet_wrap(~fct_reorder(ctyname2,1-maxpct),scales = "free")+
+  scale_x_continuous(expand = expansion(add = c(-0.2,-0.2)))+
+  scale_y_continuous(expand = expansion(add = c(22,22)))+
   labs(title = "Asia")+
   theme_void()
+
     
 top5kprops_country_spat %>% 
   filter(region_un=="Africa") %>% 
@@ -217,43 +357,53 @@ top5kprops_country_spat %>%
   geom_moon(aes(x,y,ratio=1-maxpct),fill="white",color="grey",size=25)+
   geom_moon(aes(x,y,ratio=maxpct),right=FALSE,fill="#317373",color="grey",size=25)+
   geom_text(aes(x,y,label=paste0(round(maxpct*100,1),"%")))+
+  geom_text(aes(x=1,y=-24,label=paste("n =",n_ctry)))+
   facet_wrap(~fct_reorder(ctyname2,1-maxpct),scales = "free")+
+  scale_x_continuous(expand = expansion(add = c(-0.2,-0.2)))+
+  scale_y_continuous(expand = expansion(add = c(22,22)))+
   labs(title = "Africa")+
   theme_void()
 
 top5kprops_country_spat %>% 
   filter(region_un=="Americas") %>% 
   ggplot()+
-  geom_moon(aes(x,y,ratio=1-maxpct),fill="white",color="grey",size=35)+
-  geom_moon(aes(x,y,ratio=maxpct),right=FALSE,fill="#317373",color="grey",size=35)+
+  geom_moon(aes(x,y,ratio=1-maxpct),fill="white",color="grey",size=25)+
+  geom_moon(aes(x,y,ratio=maxpct),right=FALSE,fill="#317373",color="grey",size=25)+
   geom_text(aes(x,y,label=paste0(round(maxpct*100,1),"%")))+
+  geom_text(aes(x=1,y=-24,label=paste("n =",n_ctry)))+
   facet_wrap(~fct_reorder(ctyname2,1-maxpct),scales = "free")+
   labs(title = "Americas")+
+  scale_x_continuous(expand = expansion(add = c(-0.2,-0.2)))+
+  scale_y_continuous(expand = expansion(add = c(22,22)))+
   theme_void()
 
 
 top5kprops_country_spat %>% 
   filter(region_un=="Europe") %>% 
   ggplot()+
-  geom_moon(aes(x,y,ratio=1-maxpct),fill="white",color="grey",size=25)+
-  geom_moon(aes(x,y,ratio=maxpct),right=FALSE,fill="#317373",color="grey",size=25)+
+  geom_moon(aes(x,y,ratio=1-maxpct),fill="white",color="grey",size=15)+
+  geom_moon(aes(x,y,ratio=maxpct),right=FALSE,fill="#317373",color="grey",size=15)+
   geom_text(aes(x,y,label=paste0(round(maxpct*100,1),"%")))+
+  geom_text(aes(x=1,y=-115,label=paste("n =",n_ctry)))+
   facet_wrap(~fct_reorder(ctyname2,1-maxpct),scales = "free")+
+  scale_x_continuous(expand = expansion(add = c(-0.2,-0.2)))+
+  scale_y_continuous(expand = expansion(add = c(105,105)))+
   labs(title = "Europe")+
   theme_void()
 
 top5kprops_country_spat %>% 
   filter(region_un=="Oceania") %>% 
   ggplot()+
-  geom_moon(aes(x,y,ratio=1-maxpct),fill="white",color="grey",size=35)+
-  geom_moon(aes(x,y,ratio=maxpct),right=FALSE,fill="#317373",color="grey",size=35)+
-  geom_text(aes(x,y,label=paste0(round(maxpct*100,1),"%")))+
-  facet_wrap(~fct_reorder(ctyname2,1-maxpct),scales = "free")+
+  geom_moon(aes(x,y,ratio=1-maxpct),fill="white",color="grey",size=45)+
+  geom_moon(aes(x,y,ratio=maxpct),right=FALSE,fill="#317373",color="grey",size=45)+
+  geom_text(aes(x,y,label=paste(paste0(round(maxpct*100,1),"%"),"\n",paste("n =",n_ctry))))+
+  facet_wrap(~fct_reorder(ctyname2,1-maxpct),shrink = TRUE,scales = "fixed")+
   labs(title = "Oceania")+
   theme_void()
 ```
 
 On a map:
+
 ```{r}
   ggplot()+
     geom_sf(data=countriesdat,fill="gray",linewidth=0.05)+
@@ -263,3 +413,61 @@ On a map:
 
 ```
 
+# Government domains
+
+The government domains dataset includes **`r nrow(domain_gov)`** websites from **`r ncountries_gov`** countries.
+
+## Subdomains
+
+Of the total number of sites/urls, almost half of these entries represent subdomains within organizational domains.
+
+Total sites: `r domain_gov %>% nrow`  
+Organizational domains: `r domain_gov %>% distinct(organizational_domain) %>% nrow()`  
+
+An organizational domain is the "root domain/top-level domain" of a domain name. That is, a domain name with all the subdomains removed[^1]. 
+
+For example: _childsupport.ny.gov_ and _senate.ny.gov_ are both subdomains of the New York _.ny.gov_ domain.
+
+This is relevant for DMARC because policies can be inherited for subdomains but they can also be set flexibly and 'adversaries can still deliver emails on behalf of a sites subdomains' if best practices are not followed.
+
+[^1]: https://dmarcly.com/blog/how-dmarc-works-with-subdomains-dmarc-sp-tag
+
+Most organizational domains have few subdomains, but `r domain_gov %>% group_by(organizational_domain) %>% add_count() %>% pull(n) %>% {length(which(.>100))}` have >100 subdomains and "_jcy.gov.cn_" has **569** subdomains. 
+
+```{r}
+domain_gov %>% group_by(organizational_domain) %>% add_count() %>% pull(n) %>% summary
+```
+
+
+## By country - govt
+
+```{r}
+govtprops_country <- 
+domain_gov %>% count(country,dmarc_valid) %>%
+  group_by(country) %>%
+  mutate(pct = prop.table(n)) %>% 
+  mutate(n_ctry=max(cumsum(n)))
+
+govt_cty_min_dmarc <- govtprops_country  %>% mutate(x=1,y=1,maxpct=max(pct)) %>% ungroup() %>% filter(dmarc_valid==TRUE) %>% 
+  slice_min(maxpct,n=1) 
+
+govt_cty_max_dmarc <- govtprops_country  %>% mutate(x=1,y=1,maxpct=max(pct)) %>% ungroup() %>% filter(dmarc_valid==TRUE) %>% 
+  slice_max(pct,n=5)  
+```
+
+By country, DMARC coverage, or the proportion of domains with DMARC records varied between `r round(govt_cty_min_dmarc$pct,1)*100` (`r govt_cty_min_dmarc$country`) to  `r govt_cty_max_dmarc$pct[1]*100` %. Armenia and Togo, with very small number of records in the dataset (5 and 2, respectively) had 100% coverage. After that, Malta, Moldova and Hong Kong, had more records in the data (32, 105, and 183 respectively) with over 93% DMARC-enabled domains.
+
+```{r}
+govt_cty_max_dmarc %>% select(country,pct) %>% gt()
+```
+
+Across countries, DMARC coverage varied wiedely between 60 and 100% without a clear peak or pattern.
+
+```{r}
+govtprops_country  %>% mutate(x=1,y=1,maxpct=max(pct)) %>% 
+  arrange(desc(maxpct)) %>% ungroup() %>% 
+  filter(dmarc_valid!=FALSE) %>% 
+  ggplot()+
+  geom_histogram(aes(x=maxpct))+labs(x="dmarc coverage (%)")
+
+```
